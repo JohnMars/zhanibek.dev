@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zhanibek Marshal</title>
+    <link>https://zhanibek.dev/</link>
+    <description>Notes on Android, team practice, and the small process choices that compound.</description>
+    <language>en-gb</language>
+    <atom:link href="https://zhanibek.dev/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Apr 2026 09:00:00 +0200</lastBuildDate>
+
+    <item>
+      <title>Thinking in coroutines, not threads</title>
+      <link>https://zhanibek.dev/article.html?slug=thinking-in-coroutines</link>
+      <guid isPermaLink="false">zhanibek.dev/thinking-in-coroutines</guid>
+      <pubDate>Wed, 22 Apr 2026 09:00:00 +0200</pubDate>
+      <description>After a decade of background-threading patterns on Android, switching mental models took longer than the syntax. Here's what finally clicked.</description>
+    </item>
+
+    <item>
+      <title>CI as a design tool</title>
+      <link>https://zhanibek.dev/article.html?slug=ci-as-design-tool</link>
+      <guid isPermaLink="false">zhanibek.dev/ci-as-design-tool</guid>
+      <pubDate>Sun, 08 Mar 2026 09:00:00 +0100</pubDate>
+      <description>The pipeline isn't infrastructure. It's the loudest stakeholder in the room.</description>
+    </item>
+
+    <item>
+      <title>The quiet screen</title>
+      <link>https://zhanibek.dev/article.html?slug=the-quiet-screen</link>
+      <guid isPermaLink="false">zhanibek.dev/the-quiet-screen</guid>
+      <pubDate>Sat, 14 Feb 2026 09:00:00 +0100</pubDate>
+      <description>A short essay on UI density, attention, and why my favorite Android app has only three buttons.</description>
+    </item>
+
+    <item>
+      <title>JUnit is not the enemy of fast feedback</title>
+      <link>https://zhanibek.dev/article.html?slug=junit-is-not-the-enemy</link>
+      <guid isPermaLink="false">zhanibek.dev/junit-is-not-the-enemy</guid>
+      <pubDate>Mon, 19 Jan 2026 09:00:00 +0100</pubDate>
+      <description>A common refrain on teams: "the test suite is slow." Almost always, the suite is fine. The seams are wrong.</description>
+    </item>
+
+    <item>
+      <title>Leading without becoming a manager</title>
+      <link>https://zhanibek.dev/article.html?slug=leading-without-becoming-a-manager</link>
+      <guid isPermaLink="false">zhanibek.dev/leading-without-becoming-a-manager</guid>
+      <pubDate>Tue, 02 Dec 2025 09:00:00 +0100</pubDate>
+      <description>Notes from three years of staff-IC work.</description>
+    </item>
+
+    <item>
+      <title>Small tools, small teams</title>
+      <link>https://zhanibek.dev/article.html?slug=small-tools-small-teams</link>
+      <guid isPermaLink="false">zhanibek.dev/small-tools-small-teams</guid>
+      <pubDate>Thu, 30 Oct 2025 09:00:00 +0100</pubDate>
+      <description>Internal tooling rarely deserves a roadmap. It deserves a Tuesday afternoon.</description>
+    </item>
+  </channel>
+</rss>
