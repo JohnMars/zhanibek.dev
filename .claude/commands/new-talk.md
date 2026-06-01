@@ -1,4 +1,4 @@
-Add a new talk entry to the personal website's `window.SITE.talks` array across all 8 HTML files.
+Add a new talk entry to the personal website's `window.SITE.talks` array.
 
 ## Steps
 
@@ -20,8 +20,7 @@ Add a new talk entry to the personal website's `window.SITE.talks` array across 
    - If `video` is a YouTube URL (and no slides): download the YouTube hqdefault thumbnail `https://i.ytimg.com/vi/{video_id}/hqdefault.jpg` to `assets/thumbnails/{slug}.jpg`.
    - Set `thumbnail: "assets/thumbnails/{slug}.jpg"` in the entry.
 
-4. Insert the new entry at the **top** of the `talks: [` array (after the opening `[`) in all 8 HTML files:
-   - `index.html`, `articles.html`, `article.html`, `talks.html`, `talk.html`, `resume.html`, `now.html`, `books.html`
+4. Insert the new entry at the **top** of the `talks: [` array (after the opening `[`) in **`site-data.js` only**. Do not edit any HTML file.
 
 5. Entry format (include only non-empty optional fields):
 ```javascript
@@ -41,4 +40,4 @@ Add a new talk entry to the personal website's `window.SITE.talks` array across 
 },
 ```
 
-6. Confirm how many files were updated and show the new entry.
+6. Confirm the entry was added and show it.
