@@ -48,23 +48,12 @@ def extract_array(content, array_name):
 
 # ── Check 1: SITE data consistency ────────────────────────────────────────────
 print("1. Checking SITE data consistency...")
-ref_content = read("index.html")
-ref_block = extract_site_data(ref_content)
-
-for fname in FILES[1:]:
+if not os.path.exists(os.path.join(BASE, "site-data.js")):
+    flag("site-data.js", "Missing site-data.js")
+for fname in FILES:
     content = read(fname)
-    block = extract_site_data(content)
-    if block != ref_block:
-        ref_lines = ref_block.splitlines() if ref_block else []
-        other_lines = block.splitlines() if block else []
-        for i, (a, b) in enumerate(zip(ref_lines, other_lines)):
-            if a != b:
-                flag(fname, f"SITE data differs from index.html at line {i+1}",
-                     f"index.html: {a.strip()}\n    {fname}: {b.strip()}")
-                break
-        else:
-            if len(ref_lines) != len(other_lines):
-                flag(fname, f"SITE data has different length: {len(other_lines)} vs {len(ref_lines)} lines in index.html")
+    if '<script src="site-data.js"></script>' not in content:
+        flag(fname, "Missing <script src=\"site-data.js\"></script>")
 
 # ── Check 2: Placeholder / dummy content ──────────────────────────────────────
 print("2. Checking for placeholder/dummy content...")
@@ -87,7 +76,7 @@ for fname in FILES:
 
 # ── Check 3: Thumbnail assets ─────────────────────────────────────────────────
 print("3. Checking thumbnail assets...")
-ref_content = read("index.html")
+ref_content = read("site-data.js")
 thumbnails = re.findall(r'thumbnail:\s*"([^"]+)"', ref_content)
 for thumb in thumbnails:
     path = os.path.join(BASE, thumb)
@@ -96,7 +85,7 @@ for thumb in thumbnails:
 
 # ── Check 4: Internal link targets ────────────────────────────────────────────
 print("4. Checking internal link targets...")
-talks = extract_array(ref_content, "talks")
+talks    = extract_array(ref_content, "talks")
 articles = extract_array(ref_content, "articles")
 talk_slugs = {t["slug"] for t in talks if "slug" in t}
 article_slugs = {a["slug"] for a in articles if "slug" in a}
