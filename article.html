@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Article - Zhanibek Marshal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://zhanibek.dev/article.html">
 <meta name="description" content="An article by Zhanibek Marshal on Android development.">
 <meta property="og:title" content="Article - Zhanibek Marshal">
 <meta property="og:description" content="An article by Zhanibek Marshal on Android development.">
@@ -954,6 +955,7 @@ html[data-density="airy"]    { --density: 1.35; --measure: 40rem; }
     document.getElementById("art-tag").textContent   = a.tag;
     document.getElementById("art-read").textContent  = a.readTime + " min read";
     document.title = a.title + " - Zhanibek Marshal";
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://zhanibek.dev/article.html?slug=${a.slug}`);
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
     document.querySelector('meta[name="description"]')?.setAttribute('content', a.excerpt);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content', a.excerpt);

@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Talk - Zhanibek Marshal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://zhanibek.dev/talk.html">
 <meta name="description" content="A conference talk by Zhanibek Marshal.">
 <meta property="og:title" content="Talk - Zhanibek Marshal">
 <meta property="og:description" content="A conference talk by Zhanibek Marshal.">
@@ -984,6 +985,7 @@ html[data-density="airy"]    { --density: 1.35; --measure: 40rem; }
     document.getElementById("t-dur").textContent   = t.duration;
     document.getElementById("t-cover-label").textContent = "talk · " + t.venue.toLowerCase();
     document.title = t.title + " - Zhanibek Marshal";
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://zhanibek.dev/talk.html?slug=${t.slug}`);
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
     document.querySelector('meta[name="description"]')?.setAttribute('content', t.abstract || document.title);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content', t.abstract || document.title);
