@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <title>Talk - Zhanibek Marshal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A conference talk by Zhanibek Marshal.">
+<meta property="og:title" content="Talk - Zhanibek Marshal">
+<meta property="og:description" content="A conference talk by Zhanibek Marshal.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zhanibek.dev/talk.html">
+<meta name="twitter:card" content="summary">
 <link rel="alternate" type="application/rss+xml" title="Zhanibek Marshal - RSS" href="feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -978,6 +984,9 @@ html[data-density="airy"]    { --density: 1.35; --measure: 40rem; }
     document.getElementById("t-dur").textContent   = t.duration;
     document.getElementById("t-cover-label").textContent = "talk · " + t.venue.toLowerCase();
     document.title = t.title + " - Zhanibek Marshal";
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t.abstract || document.title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', t.abstract || document.title);
     if (t.abstract) {
       document.getElementById("t-abstract-long").textContent = t.abstract;
     }

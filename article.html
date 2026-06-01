@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <title>Article - Zhanibek Marshal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An article by Zhanibek Marshal on Android development.">
+<meta property="og:title" content="Article - Zhanibek Marshal">
+<meta property="og:description" content="An article by Zhanibek Marshal on Android development.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zhanibek.dev/article.html">
+<meta name="twitter:card" content="summary">
 <link rel="alternate" type="application/rss+xml" title="Zhanibek Marshal - RSS" href="feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -948,6 +954,9 @@ html[data-density="airy"]    { --density: 1.35; --measure: 40rem; }
     document.getElementById("art-tag").textContent   = a.tag;
     document.getElementById("art-read").textContent  = a.readTime + " min read";
     document.title = a.title + " - Zhanibek Marshal";
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
+    document.querySelector('meta[name="description"]')?.setAttribute('content', a.excerpt);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', a.excerpt);
     const lede = document.querySelector(".lede");
     if (lede) lede.textContent = a.excerpt;
   });
