@@ -138,6 +138,26 @@ if 'sort((a, b) => b.date.localeCompare(a.date)).slice(0, 2)' not in index_conte
 if re.search(r'filter\([at] => [at]\.featured\)', index_content):
     flag("index.html", "Stale featured-flag filter still present in home page rendering")
 
+# ── Check 8: Sitemap ─────────────────────────────────────────────────────────
+print("8. Checking sitemap.xml...")
+SITEMAP_PAGES = [
+    "https://zhanibek.dev/",
+    "https://zhanibek.dev/articles.html",
+    "https://zhanibek.dev/talks.html",
+    "https://zhanibek.dev/books.html",
+    "https://zhanibek.dev/now.html",
+    "https://zhanibek.dev/resume.html",
+]
+sitemap_path = os.path.join(BASE, "sitemap.xml")
+if not os.path.exists(sitemap_path):
+    flag("sitemap.xml", "Missing sitemap.xml")
+else:
+    with open(sitemap_path) as f:
+        sitemap = f.read()
+    for url in SITEMAP_PAGES:
+        if url not in sitemap:
+            flag("sitemap.xml", f"Missing URL in sitemap: {url}")
+
 # ── Report ────────────────────────────────────────────────────────────────────
 print()
 if issues:
