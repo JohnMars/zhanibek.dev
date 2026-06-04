@@ -631,6 +631,27 @@ html[data-density="compact"] { --density: 0.7; --measure: 36rem; }
 html[data-density="comfy"]   { --density: 1; }
 html[data-density="airy"]    { --density: 1.35; --measure: 40rem; }
 
+/* ----- TABLE OF CONTENTS ------------------------------------ */
+.toc {
+  margin-bottom: var(--gap-xl);
+  padding: var(--gap-sm) var(--gap-md);
+  border-left: 2px solid var(--rule);
+  font-family: var(--mono);
+  font-size: var(--type-meta);
+  letter-spacing: 0.03em;
+}
+.toc-label {
+  text-transform: lowercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  margin: 0 0 0.5rem;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc li { margin-bottom: 0.3rem; }
+.toc a { color: var(--ink-2); border: 0; }
+.toc a:hover { color: var(--accent); }
+.toc .toc-h3 { padding-left: 1rem; }
+
 /* Responsive */
 @media (max-width: 640px) {
   .site-header { gap: var(--gap-sm); }

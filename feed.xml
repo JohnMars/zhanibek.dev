@@ -6,7 +6,7 @@
     <description>Notes on Android, team practice, and the small process choices that compound.</description>
     <language>en-gb</language>
     <atom:link href="https://zhanibek.dev/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 01 Jun 2026 20:52:14 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2026 06:17:48 +0000</lastBuildDate>
 
     <item>
       <title>State of Android at Trade Republic - 2024 edition</title>
@@ -16,11 +16,46 @@
       <description>A complete overview of Trade Republic's Android stack: Jetpack Compose, MVVM, Kotlin Coroutines, 92% unit test coverage, 800+ regression test cases, and a 40% local build improvement.</description>
     </item>
     <item>
-      <title>Modular Development of Android Applications</title>
-      <link>https://habr.com/en/companies/kolesa/articles/353942/</link>
-      <guid isPermaLink="false">zhanibek.dev/modular-development-android-applications</guid>
+      <title>Почему выбрал Берлин вместо Токио</title>
+      <link>why-berlin-over-tokyo.html</link>
+      <guid isPermaLink="false">zhanibek.dev/why-berlin-over-tokyo</guid>
+      <pubDate>Sun, 11 Oct 2020 09:00:00 +0000</pubDate>
+      <description>Год планировал переехать в Токио, но выбрал Берлин - о трудоголизме, жилье, work-life balance и жизни в немецкой столице.</description>
+    </item>
+    <item>
+      <title>Farewell Kolesa Group</title>
+      <link>farewell-kolesa.html</link>
+      <guid isPermaLink="false">zhanibek.dev/farewell-kolesa</guid>
+      <pubDate>Fri, 31 May 2019 09:00:00 +0000</pubDate>
+      <description>After 4 years and 3 months at the best IT company in Kazakhstan, moving on - and what leading an Android team taught me about staying kind.</description>
+    </item>
+    <item>
+      <title>Колёса Академия - что нужно знать Android разработчику</title>
+      <link>kolesa-academy-android.html</link>
+      <guid isPermaLink="false">zhanibek.dev/kolesa-academy-android</guid>
+      <pubDate>Sat, 08 Dec 2018 09:00:00 +0000</pubDate>
+      <description>OOP, паттерны, алгоритмы и Android SDK - что нужно знать, чтобы пройти отбор в Колёса Академию.</description>
+    </item>
+    <item>
+      <title>Code Labs: Android Architecture Components</title>
+      <link>android-architecture-components-codelab.html</link>
+      <guid isPermaLink="false">zhanibek.dev/android-architecture-components-codelab</guid>
+      <pubDate>Fri, 12 Oct 2018 09:00:00 +0000</pubDate>
+      <description>Пошаговый codelab с DevFest Almaty 2018: ViewModel, LiveData, Room и Repository - строим приложение-клон Колёс.</description>
+    </item>
+    <item>
+      <title>Почему Android разработчики переходят на Kotlin</title>
+      <link>why-android-kotlin-ru.html</link>
+      <guid isPermaLink="false">zhanibek.dev/why-android-kotlin-ru</guid>
+      <pubDate>Fri, 28 Sep 2018 09:00:00 +0000</pubDate>
+      <description>Заметки с митапа DrinkUp Almaty о прелестях Kotlin и почему разработчики уходят с Java.</description>
+    </item>
+    <item>
+      <title>Модульная разработка Android приложений</title>
+      <link>modular-android-libraries-ru.html</link>
+      <guid isPermaLink="false">zhanibek.dev/modular-android-libraries-ru</guid>
       <pubDate>Fri, 20 Apr 2018 09:00:00 +0000</pubDate>
-      <description>From git submodules to private Artifactory and a monorepo - how Kolesa Group shares business logic and data layers across three products without code duplication.</description>
+      <description>Как «Колёса Крыша Маркет» вынесла бизнес-логику и слой данных в общую библиотеку для трёх продуктов.</description>
     </item>
   </channel>
 </rss>

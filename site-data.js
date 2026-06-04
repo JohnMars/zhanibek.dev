@@ -28,14 +28,59 @@ window.SITE = {
       featured: true
     },
     {
-      slug: "modular-development-android-applications",
-      title: "Modular Development of Android Applications",
-      date: "2018-04-20",
-      readTime: 8,
+      slug: "why-berlin-over-tokyo",
+      title: "Почему выбрал Берлин вместо Токио",
+      date: "2020-10-11",
+      readTime: 18,
+      tag: "life",
+      excerpt: "Год планировал переехать в Токио, но выбрал Берлин - о трудоголизме, жилье, work-life balance и жизни в немецкой столице.",
+      url: "why-berlin-over-tokyo.html"
+    },
+    {
+      slug: "farewell-kolesa",
+      title: "Farewell Kolesa Group",
+      date: "2019-05-31",
+      readTime: 2,
+      tag: "career",
+      excerpt: "After 4 years and 3 months at the best IT company in Kazakhstan, moving on - and what leading an Android team taught me about staying kind.",
+      url: "farewell-kolesa.html"
+    },
+    {
+      slug: "kolesa-academy-android",
+      title: "Колёса Академия - что нужно знать Android разработчику",
+      date: "2018-12-08",
+      readTime: 12,
       tag: "android",
-      excerpt: "From git submodules to private Artifactory and a monorepo - how Kolesa Group shares business logic and data layers across three products without code duplication.",
-      url: "https://habr.com/en/companies/kolesa/articles/353942/"
-    }
+      excerpt: "OOP, паттерны, алгоритмы и Android SDK - что нужно знать, чтобы пройти отбор в Колёса Академию.",
+      url: "kolesa-academy-android.html"
+    },
+    {
+      slug: "android-architecture-components-codelab",
+      title: "Code Labs: Android Architecture Components",
+      date: "2018-10-12",
+      readTime: 25,
+      tag: "android",
+      excerpt: "Пошаговый codelab с DevFest Almaty 2018: ViewModel, LiveData, Room и Repository - строим приложение-клон Колёс.",
+      url: "android-architecture-components-codelab.html"
+    },
+    {
+      slug: "why-android-kotlin-ru",
+      title: "Почему Android разработчики переходят на Kotlin",
+      date: "2018-09-28",
+      readTime: 1,
+      tag: "android",
+      excerpt: "Заметки с митапа DrinkUp Almaty о прелестях Kotlin и почему разработчики уходят с Java.",
+      url: "why-android-kotlin-ru.html"
+    },
+    {
+      slug: "modular-android-libraries-ru",
+      title: "Модульная разработка Android приложений",
+      date: "2018-04-20",
+      readTime: 2,
+      tag: "android",
+      excerpt: "Как «Колёса Крыша Маркет» вынесла бизнес-логику и слой данных в общую библиотеку для трёх продуктов.",
+      url: "modular-android-libraries-ru.html"
+    },
   ],
 
   talks: [

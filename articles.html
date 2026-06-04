@@ -904,8 +904,9 @@ html[data-density="airy"]    { --density: 1.35; --measure: 40rem; }
 
     function renderRow(a, mode) {
       const href = a.url || `article.html?slug=${a.slug}`;
-      const ext = a.url ? ' target="_blank" rel="noopener"' : '';
-      const extBadge = a.url ? ' <span style="font-family:var(--mono);font-size:0.7rem;color:var(--ink-3);vertical-align:middle">↗</span>' : '';
+      const isExternal = a.url && /^https?:\/\//.test(a.url);
+      const ext = isExternal ? ' target="_blank" rel="noopener"' : '';
+      const extBadge = isExternal ? ' <span style="font-family:var(--mono);font-size:0.7rem;color:var(--ink-3);vertical-align:middle">↗</span>' : '';
       if (mode === "cards") {
         return `<li>
           <a class="card" href="${href}"${ext}>

@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<title>Code Labs: Android Architecture Components - Zhanibek Marshal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://zhanibek.dev/android-architecture-components-codelab.html">
+<meta name="description" content="Пошаговый codelab с DevFest Almaty 2018: ViewModel, LiveData, Room и Repository - строим приложение-клон Колёс.">
+<meta property="og:title" content="Code Labs: Android Architecture Components - Zhanibek Marshal">
+<meta property="og:description" content="Пошаговый codelab с DevFest Almaty 2018: ViewModel, LiveData, Room и Repository - строим приложение-клон Колёс.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhanibek.dev/android-architecture-components-codelab.html">
+<meta property="og:image" content="https://zhanibek.dev/assets/og-image.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="Zhanibek Marshal - RSS" href="feed.xml">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){const t=localStorage.getItem("zm.theme");if(t&&t!=="system")document.documentElement.setAttribute("data-theme",t);const d=localStorage.getItem("zm.density");if(d)document.documentElement.setAttribute("data-density",d);})();</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<header class="site-header shell" style="padding-bottom:0; margin-bottom:0; border:0;">
+  <a href="index.html" class="brand"><span class="dot"></span>Zhanibek Marshal</a>
+  <nav class="primary">
+    <a href="index.html">home</a>
+    <a href="articles.html">articles</a>
+    <a href="talks.html">talks</a>
+    <a href="resume.html">resume</a>
+    <a href="now.html">now</a>
+    <a href="books.html">books</a>
+    <span class="utilities">
+      <button class="icon-btn" data-search-open><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg></button>
+      <a class="icon-btn" href="feed.xml"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3a10 10 0 0 1 10 10"/><path d="M3 8a5 5 0 0 1 5 5"/><circle cx="3.5" cy="12.5" r="1" fill="currentColor"/></svg></a>
+      <button class="icon-btn" data-theme-toggle>◐</button>
+    </span>
+  </nav>
+</header>
+
+<main class="shell">
+  <article class="prose">
+    <h1>Code Labs: Android Architecture Components</h1>
+    <div class="article-meta">
+      <span>12 oct 2018</span>
+      <span>android</span>
+      <span class="read-time">25 min read</span>
+    </div>
+
+    <nav class="toc">
+      <p class="toc-label">contents</p>
+      <ul>
+    <li><a href="#s1">1. Android Architecture Components</a></li>
+    <li><a href="#s2">2. Что вы будете создавать</a></li>
+    <li class="toc-h3"><a href="#s3">Этапы создания приложения</a></li>
+    <li class="toc-h3"><a href="#s4">Что вам понадобится</a></li>
+    <li class="toc-h3"><a href="#s5">Скачиваем исходный код</a></li>
+    <li><a href="#s6">3. Архитектура с использованием AAC</a></li>
+    <li class="toc-h3"><a href="#s7">Архитектура приложения копии Kolesa</a></li>
+    <li><a href="#s8">4. ViewModel и LiveData</a></li>
+    <li class="toc-h3"><a href="#s9">Жизненный цикл ViewModel</a></li>
+    <li class="toc-h3"><a href="#s10">TASK: Создание ViewModels</a></li>
+    <li class="toc-h3"><a href="#s11">LiveData</a></li>
+    <li class="toc-h3"><a href="#s12">TASK: Создание LiveData</a></li>
+    <li class="toc-h3"><a href="#s13">TASK: Обновление данных LiveData в действии</a></li>
+    <li><a href="#s14">5. Room: Локальное хранилище</a></li>
+    <li class="toc-h3"><a href="#s15">Room: Аннотация</a></li>
+    <li class="toc-h3"><a href="#s16">TASK: Добавляем Room в проект</a></li>
+    <li class="toc-h3"><a href="#s17">TASK: Создание сущности</a></li>
+    <li class="toc-h3"><a href="#s18">Путь Дао - создаем Database Access Object</a></li>
+    <li class="toc-h3"><a href="#s19">TASK: Создать Dao</a></li>
+    <li class="toc-h3"><a href="#s20">TASK: Создать базу данных</a></li>
+    <li class="toc-h3"><a href="#s21">Converter</a></li>
+    <li class="toc-h3"><a href="#s22">TASK: Добавить компоненты TypeConverter</a></li>
+    <li><a href="#s23">6. Шаблон проектирования Repository</a></li>
+    <li class="toc-h3"><a href="#s24">TASK: Реализация</a></li>
+    <li><a href="#s25">7. AdvertDetailsViewModel</a></li>
+    <li class="toc-h3"><a href="#s26">TASK: Реализация AdvertDetailsViewModel</a></li>
+    <li><a href="#s27">8. ViewModelProvider.Factory</a></li>
+    <li class="toc-h3"><a href="#s28">TASK: Создание AdvertDetailsViewModelFactory</a></li>
+    <li><a href="#s29">9. Итог разработки приложения с помощью Android Architecture Components</a></li>
+    <li class="toc-h3"><a href="#s30">Что дальше</a></li>
+    <li><a href="#s31">10. Использованные материалы</a></li>
+      </ul>
+    </nav>
+    <blockquote>
+    <p>DevFest, 20 Окт. 2018<br />
+    Маршал Жанибек. Ведущий разработчик команды Android<br />
+    компании Колёса | Крыша | Маркет</p>
+    </blockquote>
+    <h3 id="s1">1. Android Architecture Components</h3>
+    <p><a href="https://www.youtube.com/watch?time_continue=5&amp;v=vOJCrbr144o">Android Architecture Components</a> представляют собой набор Android-библиотек для структурирования вашего приложения таким образом, чтобы они были надежными, проверяемыми и поддерживаемыми. В дополнение к библиотекам также есть <a href="https://developer.android.com/topic/libraries/architecture/guide.html">руководство по архитектуре приложений</a>, в котором описан подход к архитектуре приложения для Android с использованием библиотек Android Architecture Components.</p>
+    <p><img alt="Android Architecture Components" src="/assets/codelabs/achitecture-components.png" /></p>
+    <p>Список представленных коллекции библиотек:<br />
+    * Lifecycle Owner - Обработчик жизненного цикла на Android<br />
+    * LiveData - Предоставляет объекты данных для подписчиков<br />
+    * ViewModel - Сохраняет данные относящиеся к View при поворотах<br />
+    * Room - Удобный инструмент для работы с SQLite БД<br />
+    * Navigation<br />
+    * WorkManager<br />
+    * DataBinding</p>
+    <h3 id="s2">2. Что вы будете создавать</h3>
+    <p>Вы будете использовать различные компоненты, чтобы сделать приложение Колёса,<br />
+    которое извлекает данные из удаленного источника, сохраняет локально и отображает их пользователю.</p>
+    <h4 id="s3">Этапы создания приложения</h4>
+    <ol>
+    <li>Исследуйте принципы в руководстве по архитектуре приложений</li>
+    <li>Используйте библиотеку Lifecycle, которая включает LiveData и ViewModel</li>
+    <li>Используйте библиотеку сохранения данных Room</li>
+    </ol>
+    <p>Запросы в API и UI часть будут заранее доступны в проекте</p>
+    <h4 id="s4">Что вам понадобится</h4>
+    <ol>
+    <li>Android Studio 3.0 или новее</li>
+    <li>Знакомство с созданием Android-приложений и жизненным циклом активности Android</li>
+    <li>Базовое знание SQLite</li>
+    <li>Например, вы должны иметь возможность писать операторы SELECT с предложением WHERE.</li>
+    <li>Базовое знание потоковой обработки и обработки асинхронных задач в Android</li>
+    </ol>
+    <h4 id="s5">Скачиваем исходный код</h4>
+    <ol>
+    <li><code>git clone https://github.com/JohnMars/google-devfest-almaty-2018.git</code></li>
+    <li>Открыть в Android Studio</li>
+    </ol>
+    <p>Всю историю commit можно увидеть в master ветке</p>
+    <h3 id="s6">3. Архитектура с использованием AAC</h3>
+    <p><img alt="Architecture" src="/assets/codelabs/architecture.png" /></p>
+    <p><strong>UI Controller</strong> - это действия или фрагменты. Единственное задача UI контроллера - это знать, как отображать данные и передавать события UI, такие как нажитие кнопки. UI контроллеры не содержат данных UI, а также не работают с данными напрямую.</p>
+    <p><strong>ViewModels и LiveData</strong> - эти классы представляют все данные, необходимые для отображения UI.</p>
+    <p><strong>Repository</strong> - этот класс является единственным источником для всех данных нашего приложения и действует как чистый API для взаимодействия с UI. ViewModels просто запрашивает данные из Repository. Нам не нужно беспокоиться о том, должен ли Repository загружаться из базы данных или сети или как и когда сохранять данные. Repository управляет всем этим. В рамках этой задачи Repository является посредником между различными источниками данных.</p>
+    <p><strong>Remote Data Source</strong> - управляет данными из удаленного источника данных, такого как Интернет.</p>
+    <p><strong>Model</strong> - управляет локальными данными, хранящимися в базе данных.</p>
+    <h4 id="s7">Архитектура приложения копии Kolesa</h4>
+    <p>Как в итоге должно выглядеть приложение, которое вы будете разрабатывать</p>
+    <p><img alt="AdvertListActivity and AdvertDetailsActivity" src="/assets/codelabs/dev-fest-app.png" /></p>
+    <p>Будет 2 Activity (AdvertListActivity и AdvertDetailsActivity) с двумя ViewModel (AdvertListViewModel и AdvertDetailsViewModel). Они будут обращаться к классу Repository (AdvertisementRepository), который будет управлять связью между базой данных SQLite и сетевым источником данных. В вашем расположении будет готовый AdvertisementNetworkDataSource в проекте с готовыми данными. AdvertisementNetworkDataSource будет отправлять запросы чтобы получить данные объявления <a href="https://stash.kolesa-team.org/projects/MAPG/repos/sample/">с замоканного сервера</a>. В нем содержится урезанные данные с сайта колёс.</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Toyota Camry 2018 года&quot;,
+    &quot;price&quot;: 8300000,
+    &quot;created_at&quot;: 1539705559,
+    &quot;specification&quot;: &quot;литые диски, ксенон, кожа, USB, ГУР, ABS, SRS, бортовой компьютер, свежепригнан, налог уплачен, вложений не требует&quot;,
+    &quot;text&quot;: &quot;Автомобиль в замечательном состоянии, без вложений. Все вопросы в телефон режиме! Торг!&quot;,
+    &quot;parameters&quot;: [
+      {
+        &quot;label&quot;: &quot;Город&quot;,
+        &quot;value&quot;: &quot;Алматы&quot;
+      }
+    ],
+    &quot;photos&quot;: [
+      {
+        &quot;url&quot;: &quot;https://photos-b-kl.kcdn.kz/68/689db250-d36d-4bf5-9897-1daf97939a1f/1-full.jpg&quot;
+      }
+    ],
+    &quot;phones&quot;: [
+      {
+          &quot;number&quot;: &quot;+77071234567&quot;
+      }
+    ]
+  }
+]
+</code></pre>
+    <p>В данном code labs вы будете разрабатывать классы обрисованные зелеными линиями.<br />
+    Каркасы этих классов уже заготовлены в проекте, который вы скачали ранее.</p>
+    <p><img alt="Dev Fest Kolesa Architecture" src="/assets/codelabs/kolesa-architecture.png" /></p>
+    <h3 id="s8">4. ViewModel и LiveData</h3>
+    <p>Класс ViewModel  предназначен для содержания и управления данными UI в рамках жизненного цикла. Это позволяет хранить данные во время изменении конфигурации такие как повороты экрана. Разделив данные UI от UI контроллеров, вы можете разделить ответственность в слое Presentation:</p>
+    <ul>
+    <li>ViewModel будет отвественным за предоставление данных, управление ими и хранение состояния UI</li>
+    <li>UI контроллеры будут отвечать за отображение состояния данных.</li>
+    </ul>
+    <p>ViewModel привязываются к одному UI контроллеру, которому они должны предоставлять данные. Чтобы создать ViewModel требуется классы LifecycleOwner и Lifecycle, который содержится в них:</p>
+    <ul>
+    <li>Lifecycle - объект который определяет состояние жизненного цикла Android</li>
+    <li>LifecycleOwner - объект который содержит, такие как Activity и Fragment.</li>
+    </ul>
+    <p>Когда вы создаете ViewModel, вам нужно предоставить компонент с LifecycleOwner. Это обычно Activity или Fragment. Предоставляя LifecycleOwner, вы установливаете связь между ViewModel и LifecycleOwner.</p>
+    <h4 id="s9">Жизненный цикл ViewModel</h4>
+    <p>Чтобы <strong>ViewModel</strong> мог держать данные вне зависимо от UI контроллера, жизненный цикл у ViewModel отличается от <strong>LifeCycleOwner</strong>. Ниже приведена разница между жизненным циклом Activity и ViewModel.</p>
+    <p><img alt="ViewModel lifecycle" src="/assets/codelabs/viewmodel-lifecycle.png" /></p>
+    <p>Как мы видим, ViewModel существует до тех пор, пока Activity полностью не уничтожится.<br />
+    Для детального изучения ViewModel, вы можете ознакомиться <a href="https://medium.com/androiddevelopers/viewmodels-a-simple-example-ed5ac416317e">с данной статьей</a>.</p>
+    <h4 id="s10">TASK: Создание ViewModels</h4>
+    <p>Далее вы будете создавать ViewModel в проекте. Сначала мы попробуем добавить ViewModel для экрана AdvertListActivity.</p>
+    <ol>
+    <li>Добавьте данные dependencies в файле <code>app/build.gradle</code>.</li>
+    </ol>
+<pre><code class="language-gradle">dependencies {
+  implementation &quot;androidx.lifecycle:lifecycle-extensions:$lifecycle_version&quot;
+  kapt &quot;androidx.lifecycle:lifecycle-compiler:$lifecycle_version&quot;
+}
+</code></pre>
+    <ol>
+    <li>Синхронизируем gradle.</li>
+    <li>Откройте <code>kz.kolesa.devfest.advertlist.AdvertListViewModel</code> и добавьте данный код</li>
+    </ol>
+<pre><code class="language-kotlin">class AdvertListViewModel() : ViewModel() {
+  fun getAdvertisements(): List&lt;Advertisement&gt; = emptyList()
+}
+</code></pre>
+    <ol>
+    <li>Откройте <code>kz.kolesa.devfest.advertlist.AdvertListActivity</code> добавьте переменную AdvertListViewModel.</li>
+    </ol>
+<pre><code class="language-kotlin">private lateinit var advertListViewModel: AdvertListViewModel
+</code></pre>
+    <ol>
+    <li>Создайте объект в <code>AdvertListActivity#onCreate</code></li>
+    </ol>
+<pre><code class="language-kotlin">advertListViewModel = ViewModelProviders
+        .of(this)
+        .get(AdvertListViewModel::class.java)
+</code></pre>
+    <p>Когда первый раз создается <em>AdvertListActivity</em>, метод <code>ViewModelProviders.of</code> вызывается в <code>onCreate</code>. Данный метод создаст <em>AdvertListViewModel</em>, если он еще не был создан. В дальнейшем, когда измененяется конфигурация и пересоздается Activity, <em>ViewModelProviders.of</em> вытащит объект, который был создан ранее в <em>AdvertListActivity</em>.</p>
+    <h4 id="s11">LiveData</h4>
+    <p><a href="https://developer.android.com/topic/libraries/architecture/livedata">LiveData</a> - это класс держателя данных, который умеет следить за жизненным циклом. Он сохраняет значение и позволяет наблюдать за этим значением. Под капотом класса LiveData реализован <a href="https://refactoring.guru/ru/design-patterns/observer">Observable pattern</a>.</p>
+    <p><img alt="Observer pattern" src="/assets/codelabs/observer.png" /></p>
+    <blockquote>
+    <p>Картинка взята с сайта <a href="https://refactoring.guru/ru/design-patterns/observer">Refactoring.guru</a></p>
+    </blockquote>
+    <p>Если брать Observable pattern, LiveData это наш <em>Subject</em>, а <em>наблюдатели</em> это объекты которые наследуются от <a href="https://developer.android.com/reference/android/arch/lifecycle/Observer.html">Observer</a>. Чтобы подписаться на LiveData требуется предоставить <code>LifecycleOwner</code> - LiveData следит за его жизненным циклом и сам отпишет подписчиков при его уничтожении. Вы можете подписываться на LiveData, не предоставляя LifeCycleOwner, но в таком случае вам нужно отписываться от него вручную в нужный момент.</p>
+    <h4 id="s12">TASK: Создание LiveData</h4>
+    <p><em>AdvertDetailsActivity</em> будет следить за LiveData, который будет содержаться в AdvertListViewModel. Обычный LiveData не имеет возможность устанавливать новое значение. Вам понадобится использовать <a href="https://developer.android.com/reference/android/arch/lifecycle/MutableLiveData">MutableLiveData</a> чтобы могли уведомлять новыми значениями при получения данных от источника данных.</p>
+    <p>Выполните следующие шаги чтобы создать LiveData и наблюдать за ним:</p>
+    <ol>
+    <li>В <em>AdvertListViewModel</em> добавьте LiveData, который будет содержать список объявлений.</li>
+    </ol>
+<pre><code class="language-kotlin">private val advertListLiveData = MutableLiveData&lt;List&lt;Advertisement&gt;&gt;()
+</code></pre>
+    <ol>
+    <li>Поменяйте метод <em>AdvertListViewModel#getAdvertisements</em> на LiveData</li>
+    </ol>
+<pre><code class="language-kotlin">fun getAdvertisements(): LiveData&lt;List&lt;Advertisement&gt;&gt; = advertListLiveData
+</code></pre>
+    <ol>
+    <li>В <em>AdvertListActivity</em> подпишитесь на LiveData с момента, где у вас создается <em>AdvertListViewModel</em>.</li>
+    </ol>
+<pre><code class="language-kotlin">advertListViewModel.getAdvertisements.observe(this, Observer { advertisements -&gt;
+            // Обновляем UI
+        })
+</code></pre>
+    <ol>
+    <li>По умолчанию значение у LiveData стоит <strong>null</strong>, поэтому вам нужно будет проверить его прежде чем обновлять UI.</li>
+    </ol>
+<pre><code class="language-kotlin">// обновляем UI
+advertisements?.let { updateView(it) }
+</code></pre>
+    <p>Таким образом UI контроллер будет получать актуальные данные даже при изменении конфигурации и пересоздании Activity/Fragment. При вызове метода <code>MutableLiveData#setValue</code>, LiveData будет уведомлять всех подписчиков с данным значением. В вашем случае за списком объявлений следит <em>AdvertListActivity</em>, таким образом мы сможем отобразить данные в UI.</p>
+    <blockquote>
+    <p>Важно отметить что у <code>MutableLiveData</code> содержатся 2 метода для указания значении в LiveData: <a href="https://developer.android.com/reference/android/arch/lifecycle/MutableLiveData.html#setValue(T)">setValue()</a> и <a href="https://developer.android.com/reference/android/arch/lifecycle/MutableLiveData.html#postValue(T)">postValue()</a>. Разница в том, что <em>setValue</em> можно вызывать только в главном потоке(<em>UI thread</em>). А для <em>postValue()</em> можно вызывать вне зависимости от контекста текущего потока.</p>
+    </blockquote>
+    <h4 id="s13">TASK: Обновление данных LiveData в действии</h4>
+    <p>Далее вы узнаете как сходить за данными в фоновом потоке и обновить LiveData на главном потоке. Для асинхронной задачи в проекте предоставлена библиотека <a href="https://github.com/Kotlin/kotlinx.coroutines">Kotlin Coroutines</a>. Вдаваться в эту библиотеку вы не будете, но если вам интересно, можете поизучить <a href="https://kotlinlang.org/docs/reference/coroutines-overview.html">по подробнее</a>.</p>
+    <ol>
+    <li>Добавляем сервис для загрузки данных из внешнего источника. Объект <strong>ADVERTISEMENT_SERVICE</strong> уже доступен в проекте по singleton.</li>
+    </ol>
+<pre><code class="language-kotlin">class AdvertListViewModel(
+        private val advertisementService: AdvertisementService = ADVERTISEMENT_SERVICE,
+        private val apiAdvertisementMapper: ApiAdvertisementMapper = ApiAdvertisementMapper()
+)
+</code></pre>
+    <ol>
+    <li>Данные нужно загружать только в том случае, если у <em>advertListLiveData</em> значение пустое.</li>
+    </ol>
+<pre><code class="language-kotlin">fun getAdvertisements(): LiveData&lt;List&lt;Advertisement&gt;&gt; = advertListLiveData.apply {
+        if (value == null) {
+            // Загружаем данные
+        }
+}
+</code></pre>
+    <ol>
+    <li>Воспользуйтесь функциями Kotlin Coroutines <em>launch</em> и <em>withContext</em> чтобы выполнить асинхронную задачу для загрузки данных.</li>
+    </ol>
+<pre><code class="language-kotlin">// Загружаем данные
+requestAdvertisements()
+...
+private fun requestAdvertisements() {
+        launch(UI) {
+            val advertisements = withContext(DefaultDispatcher) {
+                val searchResponse = advertisementService.searchAdvertisements().execute()
+                searchResponse.body()?.map { apiAdvertisementMapper.map(it) }
+            }
+            // Уведомляем LiveData о новом значении
+        }
+}
+</code></pre>
+    <ol>
+    <li>Данные получим в главном потоке. Об этом позаботится Coroutine, который реализован в методе requestAdvertisements(). Поэтому мы можем вызвать метод <code>setValue()</code>.</li>
+    </ol>
+<pre><code class="language-kotlin">// Уведомляем LiveData о новом значении
+advertListLiveData.value = advertisements
+// или postValue() если захотите обновить данные вне главного потока
+advertListLiveData.postValue(advertisements)
+</code></pre>
+    <p>Таким образом LiveData будет уведомлять всех подписчиков(<em>AdvertListActivity</em>), когда успешно вернется результат запроса во внешний источник данных. Даже при изменении конфигурации, объект ViewModel останется прежними и продолжит ожидать ответ по запросу. Попробуйте запустить приложение и проверить это на деле.</p>
+    <h3 id="s14">5. Room: Локальное хранилище</h3>
+    <p>Работа с классом SQLiteOpenHelper всегда состовляет мучение: создание таблицы, миграция, SQL запросы, чтение данных по Cursor и т.д. Поэтому Google предложил удобную библиотеку для хранения объектов в SQLite - <strong>Room</strong></p>
+    <ul>
+    <li>Меньше кода шаблона по сравнению со встроенными API.</li>
+    <li>Не нужно использовать ContentValues или Cursors</li>
+    <li>Используются аннотации для связки таблиц</li>
+    <li>Проверка выполнения SQL происходит во время компиляции</li>
+    <li>Неверные запросы SQL будут выявлены не во время выполнения приложения</li>
+    <li>Наблюдение за данными можно реализовать с помощью LiveData</li>
+    </ul>
+    <h4 id="s15">Room: Аннотация</h4>
+    <p>Room использует аннотацию <code>@</code> для определения структуры базы данных. Основные аннотации приведены ниже:</p>
+    <ul>
+    <li><strong>@Entity</strong> - этот компонент определяет схему таблицы базы данных.</li>
+    <li><strong>@DAO</strong> - этот компонент представляет класс или интерфейс как объект доступа к данным (DAO)</li>
+    <li><strong>@Database</strong> - свойство базы данных. В этом классе вы определяете список объектов для базы данных и объектов доступа к данным (DAO) для базы данных.</li>
+    </ul>
+    <h4 id="s16">TASK: Добавляем Room в проект</h4>
+    <p>Для добавления Room в проект, выполните следующие шаги</p>
+    <ol>
+    <li>Откройте <code>app/build.gradle</code> и добавьте следующие dependencies.</li>
+    </ol>
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation &quot;androidx.room:room-runtime:$room_version&quot;
+  kapt &quot;androidx.room:room-compiler:$room_version&quot;
+}
+</code></pre>
+    <ol>
+    <li>Нажмите кнопку для синхронизации gradle.</li>
+    </ol>
+    <p>Данные dependencies предоставляет библиотеку Room от Architecture Components. Благодаря annotation processing (<em>kapt</em>), отмеченное как room-compiler, во время компиляции приложения у вас будут проверяться валидность компонентов Room.</p>
+    <h4 id="s17">TASK: Создание сущности</h4>
+    <p>При работе с базами данных будет удобно, если вы предвадительно оформите таблицы, которые будете создавать в вашем приложении. В случае с копием приложения Колёса у нас будут такая таблица:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>price</th>
+    <th>specification</th>
+    <th>text</th>
+    <th>date</th>
+    <th>parameters</th>
+    <th>photos</th>
+    <th>phones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>Toyota Camry 2018 года</td>
+    <td>10000</td>
+    <td>foo</td>
+    <td>foo</td>
+    <td>1234</td>
+    <td>Руль:слева,...</td>
+    <td>https://photos-b-kl.kcdn.kz/68/689db250-d36d-4bf5-9897-1daf97939a1f/1-full.jpg,...</td>
+    <td>+77071234567,...</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Вы ранее работали с реляционными базами данных, такие как SQL, вы должны понимать схему этой таблицы.<br />
+    Такая таблица виде POJO выглядело бы вот так:</p>
+<pre><code class="language-kotlin">package kz.kolesa.devfest.data.room
+...
+
+data class RoomAdvertisement(
+        val id: Long,
+        val title: String,
+        val price: Long,
+        val specification: String,
+        val text: String,
+        val date: Date,
+        val parameters: List&lt;RoomParameter&gt;,
+        val photos: List&lt;RoomPhoto&gt;,
+        val phones: List&lt;RoomPhone&gt;
+) {
+
+    data class RoomPhoto(
+            val url: String
+    )
+
+    data class RoomParameter(
+            val label: String,
+            val value: String
+    )
+
+    data class RoomPhone(
+            val number: String
+    )
+}
+</code></pre>
+    <p>Теперь попробуйте добавить аннотацию Entity для POJO класса RoomAdvertisement</p>
+    <ol>
+    <li>Добавьте аннотацию <strong>@Entity</strong> с название таблицы <strong>advertisements</strong>.</li>
+    </ol>
+<pre><code class="language-kotlin">@Entity(tableName = &quot;advertisements&quot;)
+data class RoomAdvertisement(
+  ...
+)
+</code></pre>
+    <ol>
+    <li>Укажите <strong>primary key</strong> в аргументе аннотации <strong>@Entity</strong>. В вашем случае это будет <strong>id</strong>.</li>
+    </ol>
+<pre><code class="language-kotlin">@Entity(
+  tableName = &quot;advertisements&quot;,
+  primaryKeys = [&quot;id&quot;]
+)
+</code></pre>
+    <p>Благодаря языку программирования Kotlin, процесс работы с создание POJO объектов упростилось гораздо проще. Все эти <code>data class</code> при копиляции создаст вам getter методы для каждой переменной в данном классе. Если захотите чтобы POJO объект был не только для чтения, а read/write, то вы можете попробовать поменять val на var.</p>
+    <p>Дополнительные компоненты для <em>Entity</em> вы можете найти <a href="https://developer.android.com/training/data-storage/room/defining-data">в данном документации</a>.</p>
+    <h4 id="s18">Путь Дао - создаем Database Access Object</h4>
+    <p>Далее вам нужно создать компонент <a href="https://developer.android.com/reference/android/arch/persistence/room/Dao.html"><strong>@Dao</strong></a>. Dao буквально переводится как 'Объект Доступа к Данным'. Аннотацию Dao чаще всего указываем для interface, но так же можно объявить для abstract class. В функциях которые будете создавать для реализации доступа к БД, вы можете добавлять все стандартные операции CRUD: <code>@Query</code>, <code>@Insert</code>, <code>@Update</code> и <code>@Delete</code>. Подробную документацию можете посмотреть <a href="https://developer.android.com/training/data-storage/room/accessing-data">тут</a>.</p>
+    <h4 id="s19">TASK: Создать Dao</h4>
+    <ol>
+    <li>Создайте <strong>interface</strong> с названием <strong>RoomAdvertisementDao</strong> в папке <strong>kz.kolesa.devfest.data.room</strong></li>
+    <li>Добавьте аннотациюю <strong>@Dao</strong> для <strong>RoomAdvertisementDao</strong></li>
+    <li>Создайте метод <strong>insertAll</strong>, который принимает несколько количество <strong>Advertisement</strong>.</li>
+    <li>Добавьте аннотацию <strong>insert</strong> для метода <strong>insertAll</strong>.</li>
+    <li>Добавьте в аннотацию <strong>insert</strong> аргумент <strong>onConflict</strong> со значением <strong>OnConflictStrategy.REPLACE</strong></li>
+    <li>Добавьте метод <strong>getAllAdvertisements</strong> с аннотацием <strong>Query</strong>. SQL запрос будет выглядет так <code>SELECT * FROM advertisements</code></li>
+    </ol>
+    <p>В итоге должен получится такой класс</p>
+<pre><code class="language-kotlin">package kz.kolesa.devfest.data.room
+...
+
+@Dao
+interface RoomAdvertisementDao {
+
+    @Query(&quot;SELECT * FROM advertisements&quot;)
+    fun getAll(): List&lt;RoomAdvertisement&gt;
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(vararg advertisement: RoomAdvertisement)
+}
+</code></pre>
+    <h4 id="s20">TASK: Создать базу данных</h4>
+    <p>Создание базы данных так же делается с помощью аннотации. Указав анотацию <strong>@DataBase</strong> к классу, наследующие <strong>RoomDatabase</strong>, у вас будет готово экземпляр объекта для чтения и записи SQLite базы.</p>
+    <p>Наличие нескольких экземпляров базы данных вызывает проблемы, если, например, вы пытаетесь прочитать базу данных одним экземпляром во время записи в другой экземпляр. Чтобы убедиться, что вы создаете только один экземпляр RoomDatabase, ваш класс базы данных должен быть Singleton.</p>
+    <ol>
+    <li>В файле <strong>kz.kolesa.devfest.data.room.KolesaDatabase</strong> создайте <strong>абстрактный класс</strong></li>
+    <li>Сделайте класс <strong>KolesaDatabase</strong> наследником от <a href="https://developer.android.com/reference/android/arch/persistence/room/RoomDatabase">RoomDatabase</a></li>
+    <li>Добавьте аннотацию <code>@Database</code> к классу</li>
+    <li>Укажите значение <strong>version</strong> и <strong>entitiy</strong> для аннотации <code>@Database</code>.</li>
+    <li>Так как мы только создаем БД, мы укажем версию 1</li>
+    <li>В значениях <strong>entity</strong> необходимо указать список классов, которые отметили с аннотацием <code>@Entity</code></li>
+    <li>Добавить абстрактный метод <code>abstract fun advertisementDao(): AdvertisementDao</code> в классе</li>
+    </ol>
+<pre><code class="language-kotlin">  @Database(
+          entities = [RoomAdvertisement::class],
+          version = 1
+  )
+  abstract class KolesaDatabase : RoomDatabase() {
+
+        abstract fun advertisementDao(): RoomAdvertisementDao
+  }
+</code></pre>
+    <ol>
+    <li>Сделайте KolesaDatabase как Singleton.</li>
+    </ol>
+<pre><code class="language-kotlin">    companion object {
+
+        private const val KOLESA_DATABASE_NAME = &quot;kolesa&quot;
+        private lateinit var instance: KolesaDatabase
+
+        fun get(): KolesaDatabase = instance
+
+        fun initialize(context: Context) {
+            instance = create(context)
+        }
+
+        private fun create(context: Context): KolesaDatabase {
+            TODO()
+        }
+    }
+</code></pre>
+    <ol>
+    <li>Создайте KolesaDatabase через <code>Room.databaseBuilder</code>.</li>
+    </ol>
+<pre><code class="language-kotlin">private fun create(context: Context): KolesaDatabase {
+        return Room.databaseBuilder(
+                context.applicationContext,
+                KolesaDatabase::class.java,
+                KOLESA_DATABASE_NAME
+        ).build()
+}
+</code></pre>
+    <ol>
+    <li>Инициализируйте KolesaDatabase в классе <code>kz.kolesa.devfest.KolesaApplication</code>.</li>
+    </ol>
+<pre><code class="language-kotlin">override fun onCreate() {
+        super.onCreate()
+        KolesaDatabase.initialize(this)
+}
+</code></pre>
+    <p>Теперь у вас есть БД с таблицой указанной в <em>entities</em>.</p>
+    <h4 id="s21">Converter</h4>
+    <p>В классе <code>RoomAdvertisement</code> есть такие объекты как <code>Date</code>, <code>List&lt;RoomParameter&gt;</code>, <code>List&lt;RoomPhoto&gt;</code>, <code>List&lt;RoomPhone&gt;</code>. Но вы не сможете записать их в БД так как у SQLite <a href="https://sqlite.org/datatype3.html">нет указанные типы данных</a>. Для этого вам необходимо сериализовать и десериализовать при обращение к SQL - у Room есть компонент <a href="https://developer.android.com/reference/android/arch/persistence/room/TypeConverter"><strong>@TypeConverter</strong></a>.</p>
+    <p>Для преобразования между типами Java/Kotlin и типами данных, поддерживаемыми SQLite, вам необходимо определить методы преобразования и указать Room о них через аннотацию <code>@TypeConverter</code>. Для этого понадобится:<br />
+    * Создать класс который содержит методы для конвертации из одного типа в другой тип<br />
+    * Указать этим методом аннотацию <code>@TypeConverter</code><br />
+    * Добавить аннотацию <code>@TypeConverters</code> в классе, где реализован ваш БД с аннотацией <code>@Database</code></p>
+    <h4 id="s22">TASK: Добавить компоненты TypeConverter</h4>
+    <p>У вас есть несколько типов, которые не поддерживаются - Date и список(<em>List</em>) с объектами. Один из вариантов записи этих данных в SQLite это:<br />
+    * Date в Long и Long в Date когда вытаскиваем данные<br />
+    * Объекты в List запишем виде String(Text) через разделитель <em>,</em><br />
+    * Так как у Parameter существует переменные <em>label</em> и <em>value</em>, запишем их в формате <code>{label}:{value}</code> при конвертации в String</p>
+    <p>Вы определись как будете записывать и считывать данные в БД, теперь попробуйте выполнить следующие шаги:<br />
+    1. Откройте файл <code>kz.kolesa.devfest.data.room.RoomConverter</code> и добавьте аннотацию <code>@TypeConverter</code> для каждого метода.<br />
+    2. Откройте файл <code>kz.kolesa.devfest.data.room.KolesaDatabase</code> и добавьте аннотацию <code>@TypeConverters</code>.<br />
+    3. В аннотации <code>@TypeConverters</code> укажите объекты указаны в файле <strong>RoomConverter</strong></p>
+<pre><code class="language-kotlin">@TypeConverters(DateConverter::class, AdvertisementConverter::class)
+</code></pre>
+    <p>Таким образом вы завершили внедрение библиотеки Room в проект. Теперь ваши запросы в SQLite будут надежными, так как во время компиляции Room проверяет валидность ваших SQL запросов.</p>
+    <h3 id="s23">6. Шаблон проектирования Repository</h3>
+    <p>Repository отвечают за обработку данных.<br />
+    * Они предоставляют чистый API для остальной части приложения для данных приложения.<br />
+    * Где взять данные и какие вызовы API делать при обновлении данных.<br />
+    * Они являются посредниками между различными источниками данных (Room и API)</p>
+    <p>Основная вашего Repository будет записи загруженных объявлении с <strong>RemoteDataSource</strong> и получить записанное объявление для просмотра детали в <strong>AdvertDetailsActivity</strong>.<br />
+    <img alt="Repository flow" src="/assets/codelabs/repository.png" /></p>
+    <p>В вашем случае класс Repository будет управлять обменом данными между вашим недавно созданным <strong>AdvertisementDao</strong>, который дает вам доступ ко всему в базе данных и к <strong>RemoteDataSource</strong>.</p>
+    <p>Нкито, кроме класса Repository, не будет напрямую связываться с базой данных или сетевыми пакетами, а пакеты данных и сети не будут связываться с классами за пределами их ответствуенности. Таким образом, в Repository будет API для получения данных для отображения на экранах <em>AdvertListActivity</em> и <em>AdvertDetailsActivity</em>.</p>
+    <p>Обращение к Repository будете реализовать подобной схемой:<br />
+    * Ходим в RemoteDataSource за всеми объявлениями<br />
+    <img alt="Repository RemoteDataSource" src="/assets/codelabs/Repository-flow-1.png" /><br />
+    * Записываем полученные объявлении в KolesaDatabase<br />
+    <img alt="Repository KolesaDatabase" src="/assets/codelabs/Repository-flow-2.png" /><br />
+    * Если ответ от RemoteDataSource оборвется, мы обратимся за объявлиями в KolesaDatabase<br />
+    <img alt="Repository KolesaDatabase" src="/assets/codelabs/Repository-flow-no-connection.png" /></p>
+    <h4 id="s24">TASK: Реализация</h4>
+    <p>В следующем шаге вам необходимо записать полученные объявлении от <em>RemoteDataSource</em> в <em>KolesaDatabase</em>. Так же вам необходимо передать <em>AdvertisementToRoomMapper</em>. Mapper это специальный класс для преобразования моделей между слоями, например, от модели БД к модели домена. Обычно они называются XxxMapper и имеют один метод с Map имен (или преобразованием / преобразованием). В ващем случае конвертирует <em>Advertisement</em> в <em>RoomAdvertisement</em>.</p>
+    <ol>
+    <li>Откройте <code>kz.kolesa.devfest.data.DefaultAdvertisementRepository</code> и добавьте <em>KolesaDatabase</em>, <em>AdvertisementToRoomMapper</em> и <em>RoomToAdvertisementMapper</em> в конструктор.</li>
+    </ol>
+<pre><code class="language-kotlin">class DefaultAdvertisementRepository(
+        ...
+        private val kolesaDatabase: KolesaDatabase = KolesaDatabase.get(),
+        private val advertToRoomMapper: AdvertisementToRoomMapper = AdvertisementToRoomMapper(),
+        private val roomToAdvertisementMapper: RoomToAdvertisementMapper = RoomToAdvertisementMapper()
+): AdvertisementRepository
+</code></pre>
+    <ol>
+    <li>Запишите объект <em>Advertisement</em> полученное от <em>RemoteDataSource</em>.</li>
+    </ol>
+<pre><code class="language-kotlin">  override fun searchAdvertisement(): List&lt;Advertisement&gt; {
+      ...
+      val advertisementDao = kolesaDatabase.advertisementDao()
+      val advertisementList = response.body()?.map {
+          val advertisement = apiAdvertisementMapper.map(it)
+          val roomAdvertisement = advertToRoomMapper.map(advertisement)
+          advertisementDao.insertAll(roomAdvertisement)
+
+          advertisement
+      } ?: emptyList()
+
+      return advertisementList
+  }
+</code></pre>
+    <ol>
+    <li>Если же <em>RemoteDataSource</em> не смог вытащить список объявлении по каким-то причинами, вы можете попробовать вытащить все объявлении которые записаны в <em>KolesaDatabase</em>. Для этого мы переделаем <code>emptyList()</code> на обращением за данным по методу <em>AdvertisementDao</em>.</li>
+    </ol>
+<pre><code class="language-kotlin">override fun searchAdvertisement(): List&lt;Advertisement&gt; {
+  ...
+    ?: getLocalAdvertisements()
+  ...
+}    
+private fun getLocalAdvertisements(): List&lt;Advertisement&gt; {
+    return kolesaDatabase.advertisementDao().getAll().map {
+        roomToAdvertisementMapper.map(it)
+    }
+}
+</code></pre>
+    <ol>
+    <li>
+    <p>Откройте <code>kz.kolesa.devfest.data.room.AdvertisementDao</code> и добавьте метод для поиска одного объекта <em>Advertisement</em></p>
+    </li>
+    <li>
+    <p>Возвращаемся в Repository. Вытащите <em>Advertisement</em> из <em>KolesaDatabase</em> при вызове метода <code>getAdvertisement(id: Long): Advertisement?</code></p>
+    </li>
+    </ol>
+<pre><code class="language-kotlin">override fun getAdvertisement(id: Long): Advertisement? {
+    val advertisementDao = kolesaDatabase.advertisementDao()
+    val localAdvertisement = advertisementDao.find(id).firstOrNull()
+
+    return roomToAdvertisementMapper.map(localAdvertisement)
+}
+</code></pre>
+    <ol>
+    <li>Если же в <em>KolesaDatabase</em> отсутствует <em>RoomAdvertisement</em>, то вам необходимо обратиться за ним из <em>RemoteDataSource</em>.</li>
+    </ol>
+<pre><code class="language-kotlin">    return if (localAdvertisement == null) {
+        requestAdvertisement(id)?.apply {
+            advertisementDao.insertAll(advertToRoomMapper.map(this))
+        }
+    } else {
+        roomToAdvertisementMapper.map(localAdvertisement)
+    }
+</code></pre>
+    <ol>
+    <li>Осталось вам добавить класс <em>AdvertisementRepository</em> в <em>AdvertListViewModel</em>. Объект <em>AdvertisementRepository</em> уже объявлен в <em>DefaultAdvertisementRepository</em> виде переменной <strong>val DEFAULT_ADVERTISEMENT_REPOSITOR</strong>. В <em>AdvertListViewModel</em> удалите <strong>advertisementService</strong> так как единственным источником истинных данных должен быть получен от Repository.</li>
+    </ol>
+<pre><code class="language-kotlin">class AdvertListViewModel(
+        private val advertisementRepository: AdvertisementRepository = DEFAULT_ADVERTISEMENT_REPOSITORY
+) : ViewModel() {
+
+    private fun requestAdvertisements() {
+        launch(UI) {
+            val searchResponse = withContext(DefaultDispatcher) {
+                advertisementRepository.searchAdvertisements()
+            }
+            advertListLiveData.value = searchResponse
+        }
+    }
+}
+</code></pre>
+    <h3 id="s25">7. AdvertDetailsViewModel</h3>
+    <p>Вы реализовали Repository в слое data layer. Теперь вам нужно показать детали объявления, которое будет отображаться в <strong>AdvertDetailsActivity</strong>. У этого <em>Activity</em> будет свой ViewModel <strong>AdvertDetailsViewModel</strong>. Реализацию ViewModel вы ознакомились при создание <strong>AdvertListViewModel</strong>, поэтому вам не должно составить труда понять его реализацию.</p>
+    <h4 id="s26">TASK: Реализация AdvertDetailsViewModel</h4>
+    <ol>
+    <li>Откройте <code>kz.kolesa.devfest.advertdetails.AdvertDetailsViewModel</code> и создайте <em>LiveData</em> чтобы предоставить <strong>Advertisement</strong>.</li>
+    </ol>
+<pre><code class="language-kotlin">class AdvertDetailsViewModel(
+    ...
+) : ViewModel() {
+    val advertisementLiveData = MutableLiveData&lt;Advertisement&gt;()
+}
+</code></pre>
+    <ol>
+    <li>Вытащите <em>Advertisement</em> из <em>AdvertisementRepository</em> и запишите его в <strong>advertisementLiveData</strong>.</li>
+    </ol>
+<pre><code class="language-kotlin">    val advertisementLiveData = MutableLiveData&lt;Advertisement&gt;().apply {
+        if (value == null) {
+            requestAdvertisement(advertisementId)
+        }
+    }
+
+    private fun requestAdvertisement(advertisementId: Long) {
+        launch(UI) {
+            val advertisement = withContext(DefaultDispatcher) {
+                advertisementRepository.getAdvertisement(advertisementId)
+            }
+            advertisementLiveData.value = advertisement
+        }
+    }
+</code></pre>
+    <ol>
+    <li>Последним шагом будет отображение <em>Advertisement</em>, получаемое от <strong>advertisementLiveData</strong> в файле <code>kz.kolesa.devfest.advertdetails.AdvertDetailsActivity</code>.</li>
+    </ol>
+<pre><code class="language-kotlin">    private fun observeLiveData() {
+        ...
+        advertDetailsViewModel.advertisementLiveData.observe(this, Observer { advertisement -&gt;
+            advertisement?.let { onAdvertisementUpdated(it) }
+        })
+    }
+</code></pre>
+    <h3 id="s27">8. ViewModelProvider.Factory</h3>
+    <p>Когда вам нужно передавать объекты во ViewModel при созданием, вам необходимо указать класс с interface <a href="https://developer.android.com/reference/android/arch/lifecycle/ViewModelProvider.Factory">ViewModelProvider.Factory</a>. ViewModelProviders, который указываете в Activity, вытаскивает объект ViewModel из своего кэша либо инициализирует через рефлексию для создания ViewModel. Поэтому получается что при инициализации этот <em>ViewModelProviders</em> не знает как передать объект в конструктор ViewModel.</p>
+    <h4 id="s28">TASK: Создание AdvertDetailsViewModelFactory</h4>
+    <p>При нажатие на элемент в списке объявлении передается идентификатор выбранного объявления в <em>AdvertDetailsActivity</em>. При создание <em>AdvertDetailsViewModel</em> в этом Activity вы укажите <strong>AdvertDetailsViewModelFactory</strong>.</p>
+    <ol>
+    <li>Откройте файл <code>kz.kolesa.devfest.advertdetails.AdvertDetailsViewModelFactory</code> и передайте идентифатор объявления в конструктор класса.</li>
+    </ol>
+<pre><code class="language-kotlin">class AdvertDetailsViewModelFactory(
+        private val advertisementId: Long
+) : ViewModelProvider.Factory
+</code></pre>
+    <ol>
+    <li>Напишите реализацию interface <strong>ViewModelProvider.Factory</strong>.</li>
+    </ol>
+<pre><code class="language-kotlin">override fun &lt;T : ViewModel?&gt; create(modelClass: Class&lt;T&gt;): T {
+    @Suppress(&quot;UNCHECKED_CAST&quot;)
+    if (modelClass.isAssignableFrom(AdvertDetailsViewModel::class.java)) {
+        return AdvertDetailsViewModel(advertisementId) as T
+    }
+
+    throw IllegalArgumentException(&quot;Could not instantiate &quot; +
+            AdvertDetailsViewModel::class.java.simpleName)
+}
+</code></pre>
+    <ol>
+    <li>Укажите <strong>AdvertDetailsViewModelFactory</strong> в качестве <em>Factory</em> при создание <em>ViewModel</em> в файле <code>kz.kolesa.devfest.advertdetails.AdvertDetailsActivity</code>.</li>
+    </ol>
+<pre><code class="language-kotlin">    private fun initViewModel() {
+      val advertisementId = getAdvertisementId()
+      val viewModelFactory = AdvertDetailsViewModelFactory(advertisementId)
+      advertDetailsViewModel = ViewModelProviders
+              .of(this, viewModelFactory)
+              .get(AdvertDetailsViewModel::class.java)
+    }
+</code></pre>
+    <h3 id="s29">9. Итог разработки приложения с помощью Android Architecture Components</h3>
+    <h5>Поздравляю! Вы дошли до конца и реализовали приложение базовой версии Kolesa.</h5>
+    <p>В этом code labs узнали о компонентах Android Architecture: Lifecycle Owner, ViewModel, LiveData, Room. Так же вы рассмотрели подходы реализации чистой архитектуры. В чистой архитектуре очень важно абстрагировать реализации каждого класса чтобы они отвечали конкретно за одну логику.</p>
+    <ul>
+    <li>UI контроллеры - Activity или Fragment должен отвечать только за отображение данных, полученных от ViewModel.</li>
+    <li>ViewModel - выполняет роль за хранением данных UI контроллера и обращение к слою data.</li>
+    <li>LiveData - уведомляет подписчиков при получение новых данных.</li>
+    <li>Repository - является связующем звеном для ViewModel, решает откуда достать данные.</li>
+    <li>Room - реализует локальное хралище данных в SQLite.</li>
+    <li>RemoteDataSource - отвечает за загрузку даных из API сервера.</li>
+    </ul>
+    <h4 id="s30">Что дальше</h4>
+    <p>В приложении отображение данных реализован и навигация по экрану реализован по простому способу - передаем полученые данные от LiveData в <strong>RecyclerView.Adapter</strong>, а навигация происходит по Intent. Эти вещи вы бы переписать с помощию дополнительных компонентов Android Architecture Components:</p>
+    <ul>
+    <li><a href="https://developer.android.com/topic/libraries/data-binding/">DataBinding</a> - это библиотека, которая позволяет связывать компоненты UI в ваших XML с источниками данных в вашем приложении, используя <em>декларативный формат</em>, а не программно.</li>
+    <li><a href="https://developer.android.com/topic/libraries/architecture/navigation/">Navigation</a> - упрощает реализацию навигации в приложении для Android. В данном библиотеке вам нужно будет заменить UI контроллер с Activity на Fragment.</li>
+    <li><a href="https://developer.android.com/topic/libraries/architecture/paging/">Paging</a> - упрощает загрузку данных в RecyclerView, например для реализации бесконечной загрузки при листание списка.</li>
+    <li><a href="https://developer.android.com/topic/libraries/architecture/workmanager/">WorkManager</a> - упрощает определение отложенных, асинхронных задач и их запуск. Эти API позволяют вам запускать синхронизации данных периодически и на фоне.</li>
+    </ul>
+    <p>На этом code labs по теме Android Architecture Components завершен. Вы можете посмотреть весь этап разработки по коммитам <a href="https://github.com/JohnMars/google-devfest-almaty-2018/commits/master">в данном Git Repository</a>.</p>
+    <h3 id="s31">10. Использованные материалы</h3>
+    <ol>
+    <li><a href="https://codelabs.developers.google.com/codelabs/build-app-with-arch-components/index.html">Google Code Labs: Build an App with Architecture Components</a></li>
+    <li><a href="https://developer.android.com/jetpack/docs/guide">Android Developers: Guide to app architecture</a></li>
+    <li><a href="https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1">Florina Muntenescu: 7 Pro tips for Room</a></li>
+    </ol>
+    <blockquote>
+    <p>Acknowledgement: this code labs was mostly based on code labs by the Google https://codelabs.developers.google.com/codelabs/build-app-with-arch-components</p>
+    </blockquote>
+
+    <div class="divider"></div>
+    <p style="font-family:var(--mono); font-size:var(--type-meta); color:var(--ink-3); text-transform:lowercase;">filed under <a href="articles.html">android</a> · <a href="feed.xml">subscribe via rss</a></p>
+  </article>
+
+  <footer class="site-footer">
+    <span>© 2026 Zhanibek Marshal</span>
+    <span><a href="feed.xml">rss</a> · <a href="https://androiddev.social/@zhanibek">mastodon</a> · <a href="https://www.linkedin.com/in/johnmarshal/">linkedin</a></span>
+  </footer>
+</main>
+
+<div class="search-overlay" data-search-overlay data-open="false">
+  <div class="search-box">
+    <input class="search-input" data-search-input placeholder="search articles, talks, pages..." type="text" autocomplete="off">
+    <div class="search-results" data-search-results></div>
+  </div>
+</div>
+
+<script src="site-data.js"></script>
+<script>
+(function() {
+  const THEME_KEY = "zm.theme";
+  function applyTheme(t) {
+    if (t === "system" || !t) document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", t);
+  }
+  function currentTheme() { return localStorage.getItem(THEME_KEY) || "system"; }
+  function nextTheme(t)   { return t === "light" ? "dark" : t === "dark" ? "system" : "light"; }
+  function setLabel(btn) {
+    const t = currentTheme();
+    btn.textContent = t === "light" ? "☀" : t === "dark" ? "☾" : "◐";
+    btn.setAttribute("title", `theme: ${t} (click to cycle)`);
+  }
+  applyTheme(currentTheme());
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.querySelector("[data-theme-toggle]");
+    if (btn) { setLabel(btn); btn.addEventListener("click", () => { const t = nextTheme(currentTheme()); localStorage.setItem(THEME_KEY, t); applyTheme(t); setLabel(btn); }); }
+
+    // active nav
+    const raw = location.pathname.split("/").pop() || "index";
+    const path = raw.replace(/\.html$/, "") || "index";
+    document.querySelectorAll("nav.primary a").forEach(a => {
+      const href = a.getAttribute("href").replace(/\.html$/, "");
+      if (href === path) a.setAttribute("aria-current", "page");
+    });
+
+    // density
+    const d = localStorage.getItem("zm.density") || "comfy";
+    document.documentElement.setAttribute("data-density", d);
+
+    // read-time hide
+    const showRT = localStorage.getItem("zm.readtime") !== "false";
+    document.documentElement.setAttribute("data-hide-readtime", String(!showRT));
+
+    // search
+    const overlay = document.querySelector("[data-search-overlay]");
+    const input   = document.querySelector("[data-search-input]");
+    const results = document.querySelector("[data-search-results]");
+    const openBtn = document.querySelector("[data-search-open]");
+    function buildIndex() {
+      const items = [];
+      (window.SITE?.articles || []).forEach(a => items.push({ kind:"article", title:a.title, excerpt:a.excerpt, href: a.url && /^https?:\/\//.test(a.url) ? a.url : (a.url || `article.html?slug=${a.slug}`) }));
+      (window.SITE?.talks   || []).forEach(t => items.push({ kind:"talk",    title:t.title, excerpt:`${t.venue}, ${t.city}`, href:`talk.html?slug=${t.slug}` }));
+      [{ kind:"page",title:"Resume",excerpt:"Experience",href:"resume.html"},
+       { kind:"page",title:"Now",   excerpt:"What I'm working on",href:"now.html"},
+       { kind:"page",title:"Articles",excerpt:"All writing",href:"articles.html"},
+       { kind:"page",title:"Talks",  excerpt:"Public speaking",href:"talks.html"},
+       { kind:"page",title:"Books",  excerpt:"Reading list",href:"books.html"}].forEach(p=>items.push(p));
+      return items;
+    }
+    const idx = buildIndex(); let activeIdx = 0;
+    function render(q) {
+      if (!results) return;
+      q = q.trim().toLowerCase();
+      let list = q ? idx.filter(i => i.title.toLowerCase().includes(q) || (i.excerpt||"").toLowerCase().includes(q)) : idx;
+      if (!list.length) { results.innerHTML = `<div class="search-empty">no results for "${q}"</div>`; return; }
+      results.innerHTML = list.slice(0,12).map((r,i)=>`<a class="search-result ${i===activeIdx?'active':''}" href="${r.href}" data-idx="${i}"><span class="kind">${r.kind}</span><span class="title">${r.title}</span></a>`).join("");
+    }
+    function openSearch()  { if (!overlay) return; overlay.setAttribute("data-open","true"); activeIdx=0; render(""); setTimeout(()=>input?.focus(),30); }
+    function closeSearch() { if (!overlay) return; overlay.setAttribute("data-open","false"); if (input) input.value=""; }
+    openBtn?.addEventListener("click", openSearch);
+    overlay?.addEventListener("click", e => { if (e.target===overlay) closeSearch(); });
+    input?.addEventListener("input", e => { activeIdx=0; render(e.target.value); });
+    input?.addEventListener("keydown", e => {
+      const links = results.querySelectorAll(".search-result");
+      if (e.key==="ArrowDown") { e.preventDefault(); activeIdx=Math.min(activeIdx+1,links.length-1); render(input.value); }
+      else if (e.key==="ArrowUp") { e.preventDefault(); activeIdx=Math.max(activeIdx-1,0); render(input.value); }
+      else if (e.key==="Enter") { const a=results.querySelector(`.search-result[data-idx="${activeIdx}"]`); if(a) location.href=a.getAttribute("href"); }
+      else if (e.key==="Escape") closeSearch();
+    });
+    document.addEventListener("keydown", e => {
+      if ((e.key==="k"||e.key==="K")&&(e.metaKey||e.ctrlKey)) { e.preventDefault(); openSearch(); }
+      else if (e.key==="/"&&document.activeElement?.tagName!=="INPUT") { e.preventDefault(); openSearch(); }
+      else if (e.key==="Escape"&&overlay?.getAttribute("data-open")==="true") closeSearch();
+    });
+
+    // reading progress
+    const bar = document.querySelector(".progress");
+    if (bar) {
+      const onScroll = () => {
+        const article = document.querySelector("article.prose");
+        if (!article) { bar.style.width="0%"; return; }
+        const rect = article.getBoundingClientRect();
+        const pct  = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
+        bar.style.width = (pct * 100) + "%";
+      };
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll();
+    }
+  });
+
+  window.ZM = {
+    setDensity(d)   { localStorage.setItem("zm.density",d); document.documentElement.setAttribute("data-density",d); },
+    setReadtime(v)  { localStorage.setItem("zm.readtime",String(!!v)); document.documentElement.setAttribute("data-hide-readtime",String(!v)); },
+    setTheme(t)     { localStorage.setItem(THEME_KEY,t); applyTheme(t); const b=document.querySelector("[data-theme-toggle]"); if(b){ const t2=t==="light"?"☀":t==="dark"?"☾":"◐"; b.textContent=t2; } },
+    getDensity()    { return localStorage.getItem("zm.density")||"comfy"; },
+    getReadtime()   { return localStorage.getItem("zm.readtime")!=="false"; },
+    getTheme()      { return currentTheme(); }
+  };
+})();
+</script>
+<script src="tweaks.js"></script>
+</body>
+</html>

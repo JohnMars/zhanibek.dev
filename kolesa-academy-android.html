@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<title>Колёса Академия - что нужно знать Android разработчику - Zhanibek Marshal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://zhanibek.dev/kolesa-academy-android.html">
+<meta name="description" content="OOP, паттерны, алгоритмы и Android SDK - что нужно знать, чтобы пройти отбор в Колёса Академию.">
+<meta property="og:title" content="Колёса Академия - что нужно знать Android разработчику - Zhanibek Marshal">
+<meta property="og:description" content="OOP, паттерны, алгоритмы и Android SDK - что нужно знать, чтобы пройти отбор в Колёса Академию.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhanibek.dev/kolesa-academy-android.html">
+<meta property="og:image" content="https://zhanibek.dev/assets/og-image.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="Zhanibek Marshal - RSS" href="feed.xml">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){const t=localStorage.getItem("zm.theme");if(t&&t!=="system")document.documentElement.setAttribute("data-theme",t);const d=localStorage.getItem("zm.density");if(d)document.documentElement.setAttribute("data-density",d);})();</script>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<header class="site-header shell" style="padding-bottom:0; margin-bottom:0; border:0;">
+  <a href="index.html" class="brand"><span class="dot"></span>Zhanibek Marshal</a>
+  <nav class="primary">
+    <a href="index.html">home</a>
+    <a href="articles.html">articles</a>
+    <a href="talks.html">talks</a>
+    <a href="resume.html">resume</a>
+    <a href="now.html">now</a>
+    <a href="books.html">books</a>
+    <span class="utilities">
+      <button class="icon-btn" data-search-open><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg></button>
+      <a class="icon-btn" href="feed.xml"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3a10 10 0 0 1 10 10"/><path d="M3 8a5 5 0 0 1 5 5"/><circle cx="3.5" cy="12.5" r="1" fill="currentColor"/></svg></a>
+      <button class="icon-btn" data-theme-toggle>◐</button>
+    </span>
+  </nav>
+</header>
+
+<main class="shell">
+  <article class="prose">
+    <h1>Колёса Академия - что нужно знать Android разработчику</h1>
+    <div class="article-meta">
+      <span>08 dec 2018</span>
+      <span>android</span>
+      <span class="read-time">12 min read</span>
+    </div>
+
+    <nav class="toc">
+      <p class="toc-label">contents</p>
+      <ul>
+    <li><a href="#s1">Фундаментальные знания</a></li>
+    <li class="toc-h3"><a href="#s2">Принципы OOP</a></li>
+    <li class="toc-h3"><a href="#s7">Design Pattern (Паттерны проектирования)</a></li>
+    <li class="toc-h3"><a href="#s10">Алгоритмы и структуры данных</a></li>
+    <li><a href="#s13">Android SDK</a></li>
+    <li><a href="#s14">Подача на Колёса Академию</a></li>
+    <li><a href="#s15">Список дополнительных ресурсов для изучения</a></li>
+      </ul>
+    </nav>
+    <p>Ты молодой программист, а в университетах преподают только фундаментальные знания?<br />
+    Как же быть таким молодым специалистом, и в итоге стать востребованным на IT рынке?<br />
+    Вот уже 2 года как мы, объединенная компания "Колёса Крыша Маркет", проводим<br />
+    Колёса Академию для этой цели.<br />
+    В данном посте я постараюсь ответить на частые вопросы о том, к чему нужно готовиться,<br />
+    чтобы пройти отбор в нашу академию, в частности по направлению Android разработки.</p>
+    <h2 id="s1">Фундаментальные знания</h2>
+    <p>Возможно, вы уже разрабатываете базовые Android приложения, это хорошо, но без фундаментальных знаний вы со временем уткнётесь в то,<br />
+    что будете писать плохой код и не знать как правильно организовывать код.<br />
+    Чтобы решить этот вопрос, вам нужно изучить больше про концепцию<br />
+    Object-Oriented Programming и базовые принципы программирования,<br />
+    которые как раз преподаются на университетсих курсах по Computer Science.</p>
+    <h3 id="s2">Принципы OOP</h3>
+    <p>OOP состоит из четырёх принципов: Encapsulation, Abstraction, Inheritance и Polymorphism.<br />
+    Эти принципы, для начинающих разработчиков, возможно покажутся страшными словами.<br />
+    Поэтому попробуем разобраться с каждым из них.</p>
+    <h4 id="s3">Encapsulation (Инкапсуляция)</h4>
+    <p>Когда вы водите машину, вы нажимаете на газ чтобы ускориться,<br />
+    управляете рулем чтобы повернуть, отпускаете газ и нажимаете на тормоза<br />
+    чтобы остановиться. Все эти детали кроются под капотом машины, которые разработали<br />
+    инженеры. Вам как водителю предоставлен только интерфейс для того, чтобы вы могли<br />
+    комфорно водить. Эти публичные части машины можно рассмотреть как публичные части<br />
+    объекта, доступные нам как объекту "Водитель".</p>
+    <p>Инкапсуляция - возможность объекта скрывать детали реализации от других объектов,<br />
+    давая при этом публичный, либо частично скрытый доступ к нему.<br />
+    В случае с языком Java предоставляется возможность объявлять переменные или методы<br />
+    как public - для доступа любому объекту, private - для доступа только внутри класса или protected - для доступа подклассам и внутри класса.</p>
+    <p>Если вы закрываете(private) состояние объекта, предоставляя при этом возможность<br />
+    менять состояние через публичные(public) методы, то вы успешно применяете<br />
+    принцип инкапсуляции.</p>
+    <h4 id="s4">Abstraction (Абстракция)</h4>
+    <p>Когда вы разрабатываете программу, со временем проект становится очень большим и сложным.<br />
+    Различные объекты общаются друг с другом часто. Поэтому поддерживать такие проекты с<br />
+    годами становится сложнее - требования постоянно меняются. Концепт "абстракция"<br />
+    как раз нацелен на то, чтобы упростить эту задачу.</p>
+    <p>Абстракция - это модель некоего объекта из реального мира либо некое назначение в проекте.<br />
+    Данная модель должна предоставить другим объектам <strong>только</strong> механизм взаимодействия<br />
+    связанный с данной моделью.</p>
+    <p>Абстракцию можно рассматривать как расширение инкапсуляции.<br />
+    Кстати, поэтому абстракцию зачастую не включают в общий список принципов OOP.</p>
+    <p>Представьте себе что вам нужно создать объект машины. Водительно должен<br />
+    заполнить бак бензином и нажать на газ чтобы машина начала ездить.<br />
+    Водитель не должен знать как будет сгорать бензин, он только взаимодействует с<br />
+    публичными методами машинами. Желательно чтобы этот абстрактный объект (машина) был<br />
+    просто для пользования и интерфейс обращения к нему не менялся.</p>
+    <h4 id="s5">Inheritance (Наследование)</h4>
+    <p>Часто когда пишите программу, некоторые объекты имеют общую логику,<br />
+    но они не совсем одинаковые сущности.</p>
+    <p>Например, легковые машины и мотоцикл являются транспортами.<br />
+    Хорошо бы выделить общую логику свойства транспорта, как, например, способность ездить.<br />
+    Мы бы могли создать родительский класс Vehicle для Car и Motorbike - это и есть Наследование.</p>
+    <p>Но важно отметить, что не все транспорты имеют колеса как легковые машины или мотоциклы.<br />
+    Добавим колёсо для лодок, чтобы он тоже умел ездить на автодорогах?</p>
+    <p><img alt="boat with wheels" src="/assets/academy/boat-with-wheels.png" /></p>
+    <p>Такие свойства, как умение ездить или плыть можно выделить в interface.<br />
+    Но при этом класс JamesBondCar имеет способность плыть по воде.<br />
+    Язык программирования Java позволяет наследоваться только от одного класса,<br />
+    но есть возможность реализовать множество interface.</p>
+<pre><code class="language-java">interface Automobile {
+  public void run(Point destination);
+}
+interface Marine {
+  public void swim(Point destination);
+}
+class JamesBondCar extends Vehicle implements Automobile, Marine {
+  ...
+}
+</code></pre>
+    <h4 id="s6">Polymorphism (Полиморфизм)</h4>
+    <p>В принципе наследования мы рассмотрели, что машины умеют ездить.<br />
+    Но каждый из них может ездить по разному.</p>
+    <p>Принцип Полиформизм описывает возможность наследников реализовывать общие операции по своему.<br />
+    Так, например, мы можем реализовать метод run() немного по разному, в зависимости от типа машины.</p>
+    <p>Если бы в программе содержался список автомобилей, то, пробегаясь по этому списку,<br />
+    каждый объект в этом списке выполнял бы операцию run() по разному.</p>
+<pre><code class="language-java">private void runAll(List&lt;Automobile&gt; automobiles, Point point) {
+  for (Automobile automobile : automobiles) {
+    automobile.run(point);
+  }
+}
+</code></pre>
+    <h3 id="s7">Design Pattern (Паттерны проектирования)</h3>
+    <p>Вы можете успешно писать Android приложения, используя известные библиотеки для<br />
+    решения определенных задач или копируя готовые функции для решения задачи.<br />
+    Но такой подход разработки со временем приведет вас к тому,<br />
+    что оптимазация функции или замена существующих библиотек будет очень затруднительна.<br />
+    Паттерны проектирования как раз помогают нам, решать такие, часто встречающиеся  проблемы.</p>
+    <p>Паттерны иногда сложно применять в реальности, так как у паттерна нет определенного кода.<br />
+    В описании паттерна приводится только общая концепция для решения той или иной проблемы.<br />
+    Есть, конечно, примеры реализации, но зачастую они не подходят под ваш проект.<br />
+    Поэтому приходится еще подстраивать паттерны по разному, в зависимости от нужд вашей программы.<br />
+    А многие иногда даже не представляют,<br />
+    что их решение проблемы включает в себя определенную концепцию паттерна.</p>
+    <h4 id="s8">Зачем же изучать паттерны</h4>
+    <p>В чем отличие, например, профессионального ремесленника от новичков?<br />
+    Профессионал знает как применить те или иные инструменты в различных условиях.</p>
+    <p>В разработке Android приложений то же самое.</p>
+    <ol>
+    <li>Зачастую многие проблемы можно решить, применив готовые решения,<br />
+    которые как раз описываются в концепциях паттерна.<br />
+    Вы можете сами додуматься до такого решения, но зачем изобретать велосипед?</li>
+    <li>Структура классов паттерна унифицирована,<br />
+    поэтому сложнее ошибиться при проектировании программ.<br />
+    Вы действуете по шаблонам, которые описаны в паттернах.</li>
+    <li>Как объяснить другому разработчику, как вы подошли к решению проблемы в проекте -<br />
+    "Я создал класс X, Y, Z и применил немного магии"?<br />
+    Проще будет если вы скажете, что применили паттерн под названием X.</li>
+    </ol>
+    <h4 id="s9">Классификация паттернов</h4>
+    <p>Многие паттерны были открыты умными дядьками программистами за долго до нас.<br />
+    Со временем их количество возросло до десятков, поэтому потребовалось  классифицировать их,<br />
+    чтобы легче было найти нужные паттерны для решения общих проблем:</p>
+    <ol>
+    <li>Creational patterns (Порождающие паттерны) - они имеют дело с механизмами создания объектов,<br />
+    подходящие в разных ситуациях. В этот тип включаются: Abstract Factory,<br />
+    Builder, Factory Method, Object Pool, Prototype и Singleton.<br />
+    С некоторыми из них вы наверняка уже сталкивались.</li>
+    <li>Structural patterns (Структурные паттерны) - данный тип предназначен для<br />
+    упрощения реализации связи между объектами. Мы каждый день применяем такие паттерны,<br />
+    как Adapter, Decorator, Facade в рабочих проектах. Так же есть Bridge, Composite,<br />
+    Flyweight, Private Data Class, Proxy.</li>
+    <li>Behavioral patterns (Поведенческие паттерны) - эти паттерны увеличивают гибкость<br />
+    в осуществлении коммуникации между объектами. Например, многим известный Observer<br />
+    относится к данному классу паттернов.</li>
+    </ol>
+    <p>Рекомендую зайти на сайт <a href="https://refactoring.guru/ru/design-patterns">refactoring.guru</a><br />
+    чтобы изучить глубже паттерны проектирования.</p>
+    <h3 id="s10">Алгоритмы и структуры данных</h3>
+    <p>Во время собеседования мы задаем вопросы связанные с алгоритмами и структурами данных.<br />
+    Некоторые кандидаты говорят нам, что они не знают как решить задачу,<br />
+    так как при разработке мобильных приложений, они не решают подобные задачи.<br />
+    Нужно ли знать разработчику о том, как выполняется сортировка данных при вызове<br />
+    функции Collections.sort или как лучше всего хранить данные,<br />
+    которые мы получаем от внешнего источника?</p>
+    <p>Можно взять реальные примеры из жизни разработчика.<br />
+    Например, мы получаем по API данные для отображения списка комментариев к объявлению.<br />
+    Нам приходит JSON Array без какой либо вложенности,<br />
+    есть только идентификатор комментария, на который пользователь отвечает.<br />
+    Как организовать структуру данных так, чтобы отобразить комментарии в виде<br />
+    дерева и при этом оптимальнее всего было искать нужный объект.</p>
+    <p>Хороший разработчик должен изучать их, чтобы решать задачи оптимально.<br />
+    Без знания алгоритмов, при решении задачи, вы попробуете решить своим путём,<br />
+    что зачастую окажется не эффективным при выполнении кода.<br />
+    Без знания структур данных, вы затруднитесь в выборе нужной структуры данных.<br />
+    Что использовать при создании объекта данных - банально через List или Map?<br />
+    Если вы не знаете как они работают при операциях записи и чтении,<br />
+    вы не сможете быстро решить, что оптимальнее всего для вашей задачи.</p>
+    <p>Программирование - это все об алгоритмах и структурах данных.<br />
+    Если бы у вас имелись базовые знания структур данных или алгоритмов,<br />
+    вы бы уже знали решение проблемы, до того как напишите строчку кода.<br />
+    Таким образом мы заранее можем понять эффективность разработчика.</p>
+    <h4 id="s11">Опытным разработчикам тоже тяжело пройти интервью</h4>
+    <p>Независимо от опыта разработчиков,<br />
+    приходится готовиться к вопросам по алгоритмам во время интервью.<br />
+    С годами теряется знание базовых алгоритмов, так как, естественно, мозг забывает об этом.<br />
+    Но если вы помните базовые принципы выполнения алгоритмов, то легче вспомнить их при повторении.</p>
+    <p>Возможно во время выполнения задачи по алгоритмам, вы столкнётесь с проблемами,<br />
+    которые не решали, но достаточно иметь базовые знания алгоритмов и структур данных.<br />
+    Тем более мы не спрашиваем задачи уровня Google. Мы даём достаточно простые задачи,<br />
+    которые можно встретить на начальных уровнях в сборниках задач.</p>
+    <p><img alt="Twitter/Rallat" src="/assets/academy/twitter-rallat.png" /></p>
+    <h4 id="s12">Ресурсы для изучения алгоритмов и структуры данных</h4>
+    <p>В интернете есть множество ресурсов для этого:<br />
+    1. <a href="https://www.udemy.com/learn-algorithms">Udemy.com/learn-algorithms</a><br />
+    2. <a href="https://www.coursera.org/specializations/algorithms">Coursera.org/specializations/algorithms</a><br />
+    3. <a href="https://leetcode.com/problemset/algorithms/">Leetcode.com/problemset/algorithms</a></p>
+    <h2 id="s13">Android SDK</h2>
+    <p>Для разработки Android приложении требуется лишь Android SDK.<br />
+    В нем содержатся стандартные классы как, например: Activity, Fragment, View и т.д.<br />
+    Чтобы узнать предназначение каждых из этих классов, нужно читать официальную документацию.<br />
+    Но помимо чтения, важно еще применять их в проекте.</p>
+    <p>Попробуйте создать простое приложение, добавляя к нему новые функционалы.<br />
+    Например: авторизация, оффлайн режим, синхронизация данных раз в сутки.<br />
+    Таким образом вы сможете быстро освоить разработку Android приложения,<br />
+    применяя к каждому из этих функционалов необходимые компоненты из Android SDK.</p>
+    <h2 id="s14">Подача на Колёса Академию</h2>
+    <p>Подача на Колёса Академию продлится до 8 Января 2019 года.<br />
+    Зайдите на сайт <a href="https://job.kolesa.kz/academy">job.kolesa.kz/academy</a><br />
+    и оставьте ваши контактные данные со ссылкой на ваше резюме или портфолио.</p>
+    <p><img alt="Kolesa Academy Penguine" src="/assets/academy/kolesa-academy-penguin.png" /></p>
+    <p>Не отчаивайтесь даже если не пройдёте отбор -<br />
+    мы стараемся проводить академию каждый год летом и зимой.<br />
+    Отмечу напоследок, что половина разработчиков в команде Android - бывшие академики,<br />
+    которые успешно прошли обучение и действительно стали хорошими разработчиками.<br />
+    Про опыт прохождения академии можно посмотреть в докладе "MobileTeam.Builder()"<br />
+    <a href="https://youtu.be/bSPJL1nXd3w?t=898">на конференции Kolesa.Mobile 2.0</a></p>
+    <p>Если есть вопросы, обращайтесь ко мне в <a href="https://t.me/Orangerange">Telegram</a><br />
+    или нашим <a href="mailto:hr@kolesa.kz">Kolesa HR</a>.</p>
+    <h2 id="s15">Список дополнительных ресурсов для изучения</h2>
+    <ol>
+    <li>«Чистый код. Создание, анализ и рефакторинг» Р. Мартин</li>
+    <li>«Приемы ООП. Паттерны проектирования» Э. Гамма, Р. Хелм, Р. Джонсон, Д. Влиссидес</li>
+    <li>«Алгоритмы. Построение и анализ» Томас Х. Кормен, Чарльз И. Лейзерсон, Рональд Л. Ривест, Клиффорд Штайн</li>
+    <li>«Программист-фанатик» Чад Фаулер</li>
+    <li>«Java. Эффективное программирование» Джошуа Блох</li>
+    <li><a href="https://refactoring.guru/design-patterns/catalog">«Refactoring Guru»</a></li>
+    </ol>
+
+    <div class="divider"></div>
+    <p style="font-family:var(--mono); font-size:var(--type-meta); color:var(--ink-3); text-transform:lowercase;">filed under <a href="articles.html">android</a> · <a href="feed.xml">subscribe via rss</a></p>
+  </article>
+
+  <footer class="site-footer">
+    <span>© 2026 Zhanibek Marshal</span>
+    <span><a href="feed.xml">rss</a> · <a href="https://androiddev.social/@zhanibek">mastodon</a> · <a href="https://www.linkedin.com/in/johnmarshal/">linkedin</a></span>
+  </footer>
+</main>
+
+<div class="search-overlay" data-search-overlay data-open="false">
+  <div class="search-box">
+    <input class="search-input" data-search-input placeholder="search articles, talks, pages..." type="text" autocomplete="off">
+    <div class="search-results" data-search-results></div>
+  </div>
+</div>
+
+<script src="site-data.js"></script>
+<script>
+(function() {
+  const THEME_KEY = "zm.theme";
+  function applyTheme(t) {
+    if (t === "system" || !t) document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", t);
+  }
+  function currentTheme() { return localStorage.getItem(THEME_KEY) || "system"; }
+  function nextTheme(t)   { return t === "light" ? "dark" : t === "dark" ? "system" : "light"; }
+  function setLabel(btn) {
+    const t = currentTheme();
+    btn.textContent = t === "light" ? "☀" : t === "dark" ? "☾" : "◐";
+    btn.setAttribute("title", `theme: ${t} (click to cycle)`);
+  }
+  applyTheme(currentTheme());
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.querySelector("[data-theme-toggle]");
+    if (btn) { setLabel(btn); btn.addEventListener("click", () => { const t = nextTheme(currentTheme()); localStorage.setItem(THEME_KEY, t); applyTheme(t); setLabel(btn); }); }
+
+    // active nav
+    const raw = location.pathname.split("/").pop() || "index";
+    const path = raw.replace(/\.html$/, "") || "index";
+    document.querySelectorAll("nav.primary a").forEach(a => {
+      const href = a.getAttribute("href").replace(/\.html$/, "");
+      if (href === path) a.setAttribute("aria-current", "page");
+    });
+
+    // density
+    const d = localStorage.getItem("zm.density") || "comfy";
+    document.documentElement.setAttribute("data-density", d);
+
+    // read-time hide
+    const showRT = localStorage.getItem("zm.readtime") !== "false";
+    document.documentElement.setAttribute("data-hide-readtime", String(!showRT));
+
+    // search
+    const overlay = document.querySelector("[data-search-overlay]");
+    const input   = document.querySelector("[data-search-input]");
+    const results = document.querySelector("[data-search-results]");
+    const openBtn = document.querySelector("[data-search-open]");
+    function buildIndex() {
+      const items = [];
+      (window.SITE?.articles || []).forEach(a => items.push({ kind:"article", title:a.title, excerpt:a.excerpt, href: a.url && /^https?:\/\//.test(a.url) ? a.url : (a.url || `article.html?slug=${a.slug}`) }));
+      (window.SITE?.talks   || []).forEach(t => items.push({ kind:"talk",    title:t.title, excerpt:`${t.venue}, ${t.city}`, href:`talk.html?slug=${t.slug}` }));
+      [{ kind:"page",title:"Resume",excerpt:"Experience",href:"resume.html"},
+       { kind:"page",title:"Now",   excerpt:"What I'm working on",href:"now.html"},
+       { kind:"page",title:"Articles",excerpt:"All writing",href:"articles.html"},
+       { kind:"page",title:"Talks",  excerpt:"Public speaking",href:"talks.html"},
+       { kind:"page",title:"Books",  excerpt:"Reading list",href:"books.html"}].forEach(p=>items.push(p));
+      return items;
+    }
+    const idx = buildIndex(); let activeIdx = 0;
+    function render(q) {
+      if (!results) return;
+      q = q.trim().toLowerCase();
+      let list = q ? idx.filter(i => i.title.toLowerCase().includes(q) || (i.excerpt||"").toLowerCase().includes(q)) : idx;
+      if (!list.length) { results.innerHTML = `<div class="search-empty">no results for "${q}"</div>`; return; }
+      results.innerHTML = list.slice(0,12).map((r,i)=>`<a class="search-result ${i===activeIdx?'active':''}" href="${r.href}" data-idx="${i}"><span class="kind">${r.kind}</span><span class="title">${r.title}</span></a>`).join("");
+    }
+    function openSearch()  { if (!overlay) return; overlay.setAttribute("data-open","true"); activeIdx=0; render(""); setTimeout(()=>input?.focus(),30); }
+    function closeSearch() { if (!overlay) return; overlay.setAttribute("data-open","false"); if (input) input.value=""; }
+    openBtn?.addEventListener("click", openSearch);
+    overlay?.addEventListener("click", e => { if (e.target===overlay) closeSearch(); });
+    input?.addEventListener("input", e => { activeIdx=0; render(e.target.value); });
+    input?.addEventListener("keydown", e => {
+      const links = results.querySelectorAll(".search-result");
+      if (e.key==="ArrowDown") { e.preventDefault(); activeIdx=Math.min(activeIdx+1,links.length-1); render(input.value); }
+      else if (e.key==="ArrowUp") { e.preventDefault(); activeIdx=Math.max(activeIdx-1,0); render(input.value); }
+      else if (e.key==="Enter") { const a=results.querySelector(`.search-result[data-idx="${activeIdx}"]`); if(a) location.href=a.getAttribute("href"); }
+      else if (e.key==="Escape") closeSearch();
+    });
+    document.addEventListener("keydown", e => {
+      if ((e.key==="k"||e.key==="K")&&(e.metaKey||e.ctrlKey)) { e.preventDefault(); openSearch(); }
+      else if (e.key==="/"&&document.activeElement?.tagName!=="INPUT") { e.preventDefault(); openSearch(); }
+      else if (e.key==="Escape"&&overlay?.getAttribute("data-open")==="true") closeSearch();
+    });
+
+    // reading progress
+    const bar = document.querySelector(".progress");
+    if (bar) {
+      const onScroll = () => {
+        const article = document.querySelector("article.prose");
+        if (!article) { bar.style.width="0%"; return; }
+        const rect = article.getBoundingClientRect();
+        const pct  = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
+        bar.style.width = (pct * 100) + "%";
+      };
+      window.addEventListener("scroll", onScroll, { passive:true });
+      onScroll();
+    }
+  });
+
+  window.ZM = {
+    setDensity(d)   { localStorage.setItem("zm.density",d); document.documentElement.setAttribute("data-density",d); },
+    setReadtime(v)  { localStorage.setItem("zm.readtime",String(!!v)); document.documentElement.setAttribute("data-hide-readtime",String(!v)); },
+    setTheme(t)     { localStorage.setItem(THEME_KEY,t); applyTheme(t); const b=document.querySelector("[data-theme-toggle]"); if(b){ const t2=t==="light"?"☀":t==="dark"?"☾":"◐"; b.textContent=t2; } },
+    getDensity()    { return localStorage.getItem("zm.density")||"comfy"; },
+    getReadtime()   { return localStorage.getItem("zm.readtime")!=="false"; },
+    getTheme()      { return currentTheme(); }
+  };
+})();
+</script>
+<script src="tweaks.js"></script>
+</body>
+</html>

@@ -931,8 +931,9 @@ html[data-density="airy"]    { --density: 1.35; --measure: 40rem; }
     const allArticles = [...SITE.articles].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
     fa.innerHTML = allArticles.map(a => {
       const href = a.url || `article.html?slug=${a.slug}`;
-      const ext = a.url ? ' target="_blank" rel="noopener"' : '';
-      const extBadge = a.url ? ' <span style="font-family:var(--mono);font-size:0.7rem;color:var(--ink-3);vertical-align:middle">↗</span>' : '';
+      const isExternal = a.url && /^https?:\/\//.test(a.url);
+      const ext = isExternal ? ' target="_blank" rel="noopener"' : '';
+      const extBadge = isExternal ? ' <span style="font-family:var(--mono);font-size:0.7rem;color:var(--ink-3);vertical-align:middle">↗</span>' : '';
       return `
       <li>
         <div class="post-row">
