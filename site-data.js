@@ -85,6 +85,20 @@ window.SITE = {
 
   talks: [
     {
+      slug: "your-design-system-has-two-codebases-lets-fix-that",
+      title: "Your Design System Has Two Codebases. Let's Fix That.",
+      venue: "next.app devCon",
+      date: "2026-10-07",
+      year: 2026,
+      city: "Berlin",
+      duration: "20 min",
+      featured: true,
+      slides: "https://speakerdeck.com/johnmars/your-design-system-has-two-codebases-lets-fix-that",
+      video: "https://www.youtube.com/watch?v=QB0aIAUi9iQ",
+      thumbnail: "assets/thumbnails/your-design-system-has-two-codebases-lets-fix-that.jpg",
+      abstract: "Developers open Figma Dev mode and see generic Jetpack Compose scaffolding instead of your actual components - so they search, guess, or roll their own, and design drift happens silently. This talk shows how Figma Code Connect surfaces real Design System snippets right in Figma, how pairing it with Figma MCP teaches AI coding assistants your Design System's language instead of vanilla Compose, and how we scaled Code Connect across a large component library using Claude Code - the prompts that worked and the mistakes we made."
+    },
+    {
       slug: "maestro-reliable-e2e-testing-made-easy",
       title: "Maestro: Reliable E2E testing made easy",
       venue: "Droidcon Berlin",
