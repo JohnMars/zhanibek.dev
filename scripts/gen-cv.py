@@ -125,7 +125,10 @@ def parse():
             what = what_m.group(1)
 
             h3    = re.search(r'<h3[^>]*>([^<]+)</h3>', what)
-            where = re.search(r'<div class="where">([^<]+)</div>', what)
+            # No </div> requirement: the grid capture above stops at the first
+            # "</div></div>", which for a bullet-less entry lands before the
+            # where div's own closing tag. [^<]+ already bounds the match.
+            where = re.search(r'<div class="where">([^<]+)', what)
             title   = h3.group(1).strip()    if h3    else ''
             company = where.group(1).strip() if where else ''
 
