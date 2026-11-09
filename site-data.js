@@ -7,7 +7,7 @@ window.SITE = {
     name: "Zhanibek Marshal",
     role: "Android engineer · speaker · writer",
     bio: "Professional Android developer with over 10 years of experience. Active in the dev community, speaker at Berlindroid and other conferences. Believer in clean, testable code and automated process.",
-    location: "Berlin",
+    location: "Madrid",
     links: {
       linkedin: "https://www.linkedin.com/in/johnmarshal/",
       mastodon: "https://androiddev.social/@zhanibek",
